@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Allocation Instructions
+{% endblock %}
+
+{% block content %}
+<p>
+    Now, we start the allocation task.
+    The amount of money you earn will depend on the decisions you make or on the decisions other people make.
+    Your payoffs will be paid in private and in cash at the end of the session.
+</p>
+<p>
+    From this point forward, it is important that you do not talk, or in any way try to communicate,
+    with other people during the session.
+    If you have a question, raise your hand and an experimenter will come over to where you are sitting and answer your question in private.
+</p>
+<p>
+    This part of the experiment will consist of {{ num_rounds }} rounds.
+    In each round, you will be randomly matched with one other participant.
+    This matching will change each round.
+</p>
+    {% next_button %}
+
+{% endblock %}

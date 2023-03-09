@@ -1,0 +1,39 @@
+
+ <table class="table" style="max-height:50%, max-width:50%">
+            <thead>
+                <tr>
+                    <!-- 3 colums: -->
+                    <th>  </th>
+                    <th> Current </th>
+                    <th> Change </th>
+                </tr>
+            </thead>
+            <tr>
+                <td> Cash </td>
+                <td>{{ player.cash}}</td>
+                <td>
+                {{ previous_deltacash }}
+                </td>
+            </tr>
+            <tr>
+                <td> A </td>
+                <td>{{ player.n_a}}</td>
+                <td>
+                {{ previous_ta }}
+                </td>
+            </tr>
+            <tr>
+                <td> B </td>
+                <td>{{ player.n_b}}</td>
+                <td>
+                {{ previous_tb }}
+                </td>
+            </tr>
+            <tr>
+                <td> Payoff </td>
+                <td> {{previous_cumprofit}} </td>
+                <td> {{previous_profit}} </td>
+            </tr>
+    </table>
+            
+                

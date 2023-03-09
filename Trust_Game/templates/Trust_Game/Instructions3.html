@@ -1,0 +1,140 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Sender-Receiver Instructions
+{% endblock %}
+
+{% block content %}
+
+{% if assign_groups %}
+<div class="group_identity">You are in {{ artist }} group.</div>
+{% endif %}
+
+<p>
+    You will be assigned randomly to a sender or to a receiver and your role will remain fixed for all rounds.
+</p>
+<p>
+In this part of the experiment, both a sender and a receiver can see each other’s group affiliation and
+    what product, if any, the other player bought.
+</p>
+
+<p>
+    <strong>Role of Sender:</strong> The Sender will be given {{ endowment }} points and may choose to send
+any amount of this money to the Receiver. The amount chosen by the Sender will be multipled by {{ multiplier }} and given to the Receiver.
+</p>
+<p>
+    <strong>Role of Receiver:</strong> The Receiver, upon learning how much money is available to him or her,
+will be able to send any amount of that money back to the Sender.
+</p>
+<h3>
+Earnings in each round:
+</h3>
+<p>
+    The Sender earns {{ endowment }} - (points sent to Receiver) + (points sent back by Receiver).
+</p>
+<p>
+
+The Receiver earns {{ multiplier }} &times; (points sent by Sender) – (points sent back to Sender).
+</p>
+
+<p>
+
+The earnings in each round will not be revealed until the experiment ends.
+</p>
+<p>
+    When you’ve read and understand the instructions, click on the button to proceed to the game.
+</p>
+
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 14pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+
+    .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 28pt;
+        font-style: italic;
+        }
+
+   .group_identity {
+        font-weight: bold;
+        font-size: 16pt;
+   }
+</style>
+{% endblock %}

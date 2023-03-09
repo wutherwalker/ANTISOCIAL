@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block content %}
+  <h1>Video {{ player.round_number }}</h1>
+      <video width="640" height="360" controls autoplay preload="metadata">
+          <source src="{% static 'video1.mp4' %}" type="video/mp4">
+    </video>
+  <form method="post">
+
+    <div class="form-group">
+      <label class="control-label">How do you rate this video?</label>
+      {% formfield player.video_3_evaluation %}
+    </div>
+    <br><br>
+    {% next_button %}
+  </form>
+{% endblock %}

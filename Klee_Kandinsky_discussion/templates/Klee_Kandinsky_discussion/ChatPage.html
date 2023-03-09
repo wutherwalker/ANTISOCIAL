@@ -1,0 +1,100 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Match the Artist to the Painting
+{% endblock %}
+
+{% block content %}
+<p>
+    Before starting the next part of the experiment, we remind you of which group you are belong to.
+    Your group is {{ artist }}.
+    As you are in the {{ artist }} group, we want you to know about paintings made by {{ artist }}.
+</p>
+<p>
+    Consider the paintings below.
+    Your task is to determine which artist made each painting.
+</p>
+<table>
+    <tr>
+        <td>
+            <h2>
+                Painting A
+            </h2>
+            <img src="{% static painting_1_path %}"/>
+        </td>
+        <td>
+            <h2>
+                Painting B
+            </h2>
+            <img src="{% static painting_2_path %}"/>
+        </td>
+    </tr>
+</table>
+
+
+<p>
+    For each correct answer, you will be rewarded with an additional {{ answer_value }}.
+    You may recall {{ num_paintings }} pairs of paintings you have seen when you were assigned to the group.
+    You can use a group chat program to get help from or offer help to other members in your own group.
+</p>
+<p>
+    Messages will be shared only among all the members from your own group.
+    You will not be able to see the messages exchanged among the other group.
+    People in the other group will not see the messages from your group.
+</p>
+
+
+<p>
+        <b>Chat Box:</b><br>
+
+        <div class="row">
+        <div class="column" >
+            <p>
+                You can use the chat box to communicate with other members of your group.
+                The chat history will not be erased between rounds of this Task.<br>
+                Strictly comply by the following two <b>very important rules</b> when using the chat:
+                <ul>
+            <li> No personal information except your codename can be disclosed in the chat,</li>
+            <li> No profanity, harassment or hate-speech will be tolerated. </li>
+               </ul>
+            Chat history is recorded by the experimenter and will be monitored.
+            </p>
+        </div>
+        <div class="column">
+            {{ chat nickname=username channel=player.group.id }}
+
+        </div>
+    </div>
+</p>
+
+<p>
+Please raise your hand if you have any questions.
+</p>
+
+
+<button style="display: none">Next</button>
+
+{% endblock %}
+
+{% block styles %}
+<style>
+    .otree-chat__messages {
+        height: 400px;
+    }
+    .otree-chat__nickname {
+        color: #0000FF;
+        font-weight: bold;
+        width: 400px;
+    }
+
+    .otree-timer {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 200px;
+    }
+</style>
+
+
+{% endblock %}

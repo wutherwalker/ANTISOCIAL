@@ -1,0 +1,133 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Payment Information (Please do not close this window.)
+{% endblock %}
+
+{% block content %}
+<p>
+    The paying round was randomly chosen to be round {{ paying_round }}.
+</p>
+<p>
+    In that round, you received a payoff of {{round_payoff}}, which is worth {{ variable_payment }}.
+</p>
+<p>
+    You are guaranteed at least {{ show_up_fee }} simply for participating.
+</p>
+<p>
+    That brings your total payment to <strong>{{ total_payment }}</strong>.
+    Please write down this amount, as you will be asked for it on the payment form.
+</p>
+<p>
+    Your participant ID code is <strong>{{ participant_ID }}</strong>.
+    Please write this down, as you will be asked for it on the payment form.
+</p>
+<p>
+    The payment form can be accessed here:
+    <a href="https://forms.gle/1ZksKh8t8xDVBFNg8" target="_blank">Payment Form</a>
+</p>
+<p>
+    Once you have completed and submitted the payment form, you may close this window.
+    You will receive your payment via Venmo within 48 hours.
+</p>
+
+<h3>History of all rounds </h3>
+    <table class="history">
+        <tr>
+            <th>Round</th>
+            <th>Your Gross Income</th>
+            <th>Your Contribution</th>
+            <th>Your Tax Paid </th>
+            <th class="important">Your Payoff</th>
+            <th>Average Contribution</th>
+            <th>Average Tax Paid</th>
+            <th>Average Payoff</th>
+        </tr>
+        {% for p in player_in_all_rounds %}
+            <tr>
+                <td> {% if p.round_number == paying_round %}
+                    <b>PAYING ROUND</b>
+                    {% endif %}
+                    {{ p.round_number }}
+                </td>
+                <td>{{ p.gross_income }}</td>
+                <td>{{ p.contribution }}</td>
+                <td>{{ p.tax_paid }} </td>
+                <td class="important">{{ p.payoff }}</td>
+                <td>{{ p.get_average_contribution }}</td>
+                <td>{{ p.get_average_tax_paid }}</td>
+                <td>{{ p.get_average_payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 18pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 18pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 20pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+</style>
+{% endblock %}
+
+

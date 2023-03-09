@@ -1,0 +1,136 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Results of round {{ player.subsession.round_number }}
+{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Starting amount</th><td>{{ player.gross_income }}</td>
+    </tr>
+    <tr>
+        <th>Your contribution</th><td>{{ player.contribution }}</td>
+    </tr>
+    <tr>
+        <th>Taxable income</th><td>{{ player.taxable_income }}</td>
+    </tr>
+    <tr>
+        <th>Taxes paid</th><td>{{ player.tax_paid }}</td>
+    </tr>
+    <tr>
+        <th>After-tax income</th><td>{{ player.after_tax_income }}</td>
+    </tr>
+    <tr>
+        <th>Your share of contributions</th><td>{{ player.contribution_share }}</td>
+    </tr>
+    {% if player.revenue_return %}
+    <tr>
+        <th>Your share of tax revenue</th><td>{{ player.revenue_share }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <th class="important">Total payoff this round</th><td>{{ player.payoff }}</td>
+    </tr>
+</table>
+
+    {% next_button %}
+
+{% if player.subsession.round_number > 1 %}
+<h3>History of previous rounds </h3>
+    <table class="history">
+        <tr>
+            <th>Round</th>
+            <th>Your Gross Income</th>
+            <th>Your Contribution</th>
+            <th>Your Tax Paid </th>
+            <th class="important">Your Payoff</th>
+            <th>Average Contribution</th>
+            <th>Average Tax Paid</th>
+            <th>Average Payoff</th>
+        </tr>
+        {% for p in player_in_previous_rounds %}
+            <tr>
+                <td>{{ p.round_number }}</td>
+                <td>{{ p.gross_income }}</td>
+                <td>{{ p.contribution }}</td>
+                <td>{{ p.tax_paid }} </td>
+                <td class="important">{{ p.payoff }}</td>
+                <td>{{ p.get_average_contribution }}</td>
+                <td>{{ p.get_average_tax_paid }}</td>
+                <td>{{ p.get_average_payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 18pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 18pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 20pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+</style>
+{% endblock %}
+
+

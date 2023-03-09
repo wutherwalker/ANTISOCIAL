@@ -1,0 +1,67 @@
+body {
+  background-color: #eee; }
+
+.white-background {
+  padding: 1rem 2rem;
+  background-color: #fff;
+  width: 1000px;
+  }
+
+#da_form {
+  width: 1000px;
+  margin: 2rem 0;
+  }
+
+.status.match > strong {
+  color: #94E185; }
+
+.status.match > span {
+  animation: blinker 1s linear infinite; }
+
+span.label {
+  margin-left: 10px; }
+
+@keyframes blinker {
+  50% {
+    opacity: 0; } }
+
+.centered {
+  text-align: center; }
+
+.input-group {
+  width: 1200px;
+  text-align: right;
+  }
+
+input[type=range].slider {
+  width: 85%;
+  height: 20px;
+  }
+
+.top-margin {
+  margin-top: 10px; }
+
+.fixed {
+  table-layout: fixed;
+  }
+
+.table {
+    min-width: 900px;
+}
+
+.otree-timer {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 200px;
+}
+
+#transaction td > span.label {
+  margin-left: 12px; }
+
+#transaction table {
+  table-layout: fixed; }
+
+h4 {
+    font-weight: bold;
+}

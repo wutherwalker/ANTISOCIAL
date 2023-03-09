@@ -1,0 +1,90 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+   Charity Choices
+{% endblock %}
+
+{% block content %}
+<img src="{% static 'HW5_Julius_Taxation/amnesty-logo.jpg' %}" width="300" height="215"/>
+<p>
+    <b>Amnesty International</b> is a non-profit organization that conducts research and generates action to prevent and
+    end grave abuses of human rights, and to demand justice for those whose rights have been violated.
+    Through its international programs, Amnesty gathers and disseminates information on human rights.
+    Amnesty supports  the research into human rights violations and the coordination of international efforts to stop them.
+    Its membership program assists in the development, training, and support of local campus and country coordination
+    groups working for Amnesty to advance human rights through publication and dissemination of information to members
+    as well as the general public.
+</p>
+
+{% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 18pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 18pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 20pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+</style>
+{% endblock %}
+
+

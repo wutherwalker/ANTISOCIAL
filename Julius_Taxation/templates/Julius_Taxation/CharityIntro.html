@@ -1,0 +1,95 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Optional Donation
+{% endblock %}
+
+{% block content %}
+<p>
+    You have completed the main part of this experiment. Thank you for your participation.
+</p>
+<p>
+    Before you go, there are few more things we would like to ask of you.
+</p>
+<p>
+    Of the money you have earned from the experiment so far,
+    we are offering you the chance to donate up to {{ endowment }} to a charity.
+</p>
+<p class="important">
+    The amount of money you enter will be donated on your behalf to the charity of your choice.
+    Your name will not be used in making this donation.
+</p>
+<p> On the next page, you will see brief descriptions of each of the charities you may choose from.</p>
+
+{% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 18pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 18pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 20pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+</style>
+{% endblock %}
+
+

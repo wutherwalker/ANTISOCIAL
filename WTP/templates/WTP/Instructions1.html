@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Auction Instructions
+{% endblock %}
+
+{% block content %}
+
+<p>
+    {% if real %}
+    In this part of the experiment, we will conduct one real auction,
+    in which you will have the chance to purchase an actual {{ object_type }} to take home.
+    {% else %}
+     In this part of the experiment, we will conduct {{ fake_rounds }} rounds of auctions.
+     These rounds are hypothetical; they are here in order to help you learn how the system works.
+    {% endif %}
+</p>
+<p>
+
+    {% if real %}
+    If you buy the {{ object_type }} you will get the actual item to take home.
+    For each purchase, you will be given {{ endowment }} to spend.
+    Whatever points you do not spend will be converted into cash.
+    Remember that 1 point is equal to {{ conversion_value }} in US dollars.
+    The rounds that are not chosen to be the real purchase round will be just like the hypothetical rounds you did earlier.
+    {% else %}
+    In each round, you will have the chance to buy one of two {{ object_type }}s.
+    You will have a real buying round later on.
+    In these rounds, you have a chance to practice how to bid and what payoffs you will get.
+    In each round, you will be given {{ endowment }} to spend hypothetically.
+    These points will disappear at the end of the round.
+    But in the real buying round which comes later,
+    you will be given actual points to buy a good and whatever points
+    you do not spend will be converted into cash.
+    Please follow the instruction on the next screen carefully to learn how to buy a good and what payoff
+    you will get in the actual buying round.
+    {% endif %}
+</p>
+
+
+    {% next_button %}
+
+{% endblock %}

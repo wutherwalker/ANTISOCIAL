@@ -1,0 +1,64 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Summary of the Experiment
+{% endblock %}
+
+{% block content %}
+
+<ol>
+    <li>At the beginning of each round, you will be randomly matched with one other participant
+        from each of the three other classes to form a group of four participants, 2 <span class="red">Red</span> and
+        2 <span class="blue">Blue</span>.</li>
+    {% if digit_span > 0 %}
+    <li>
+        You will be given a new {{ digit_span }}-digit number to remember at the start of each round.
+    </li>
+    {% endif %}
+    {% if announce_treatment %}
+    <li>The computer selects the announcement according to the probabilities specified previously. Your
+        screen will display the selected announcement as "The announcement is: "</li>
+    {% endif %}
+    <li>You will be prompted to enter your choice of action, clicking
+        either X or Y.</li>
+    {% if digit_span > 0 %}
+    <li>
+        You will have to report the {{ digit_span }}-digit number you were asked to memorize earlier.
+        You must report it correctly to get your payoff for that round.
+    </li>
+    {% endif %}
+    <li>The round is over after you and the participants you are matched with have entered their
+    choices. The computer will provide a summary for the round:
+        {%if announce_treatment %} the announcement made to you, {% endif %}
+        the participants you are matched with, your choice of action, your matched participants’ choice of action,
+        and your earning in points.</li>
+    <li>This sequence will be repeated in each round, for {{ num_rounds }} rounds.</li>
+</ol>
+<p>
+    Click the "Next" button when you have finished reading these instructions and are ready to continue.
+</p>
+    {% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    title {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 16pt;
+        }
+
+    .red {
+        color: #FF0000;
+        }
+
+    .blue {
+        color: #0000FF;
+        }
+</style>
+{% endblock %}

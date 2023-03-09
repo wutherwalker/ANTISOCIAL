@@ -1,0 +1,52 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Art Task, round {{ round_number }}
+{% endblock %}
+
+{% block content %}
+
+<table>
+    {% if Klee_first %}
+    <tr>
+        <td>
+            <h2>
+                This is painting A.
+            </h2>
+            <img src="{% static Klee_painting %}"/>
+        </td>
+        <td>
+            <h2>
+                This is painting B.
+            </h2>
+            <img src="{% static Kandinsky_painting %}"/>
+        </td>
+    </tr>
+    {% else %}
+        <tr>
+        <td>
+            <h2>
+                This is painting A.
+            </h2>
+            <img src="{% static Kandinsky_painting %}"/>
+        </td>
+        <td>
+            <h2>
+                This is painting B.
+            </h2>
+            <img src="{% static Klee_painting %}"/>
+
+        </td>
+    </tr>
+    {% endif %}
+</table>
+
+<p>
+    Please choose which painting you prefer by choosing either "A" or "B" below.
+</p>
+
+    {% formfield player.choice %}
+    {% next_button %}
+
+{% endblock %}

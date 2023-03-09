@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    End of round {{ round_number }}
+{% endblock %}
+
+{% block content %}
+<p>
+    This round of the allocation task is complete.
+    Click 'Next' to continue.
+</p>
+
+    {% next_button %}
+{% endblock %}
+
+

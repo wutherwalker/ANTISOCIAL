@@ -1,0 +1,58 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+<p>
+    You chose {{ object_choice }}.
+    You offered {{ bid }}. The price chosen was {{ price }}.
+</p>
+{% if purchased %}
+<p>
+    This means that you purchased {{ object_choice }}!
+</p>
+    {% if real %}
+    <p>
+        You will receive {{ object_choice }},
+        pay a price of {{ price }}, and get to keep {{ payoff }}.
+    </p>
+    {% else %}
+    <p>
+        If this were a real round, you would receive {{ object_choice }}.
+    </p>
+    <p>
+        You would have paid a price of {{ price }}, and would get to keep {{ money_left }}.
+    </p>
+    {% endif %}
+{% else %}
+<p>
+    You did not purchase {{ object_choice }}.
+</p>
+    {% if real %}
+    <p>
+        You will get to keep the full {{ money_left }} that you were given to spend.
+    </p>
+    {% else %}
+    <p>
+        If this were a real round, you would have kept the full {{ money_left }} that you were given to spend.
+    </p>
+    {% endif %}
+{% endif %}
+{% if real %}
+<p>
+    This converts to {{ real_payoff }} in US dollars.
+</p>
+<p>
+    You will receive this money at the end of the experiment,
+    in addition to your earnings from other parts of the experiment.
+</p>
+{% endif %}
+
+    {% next_button %}
+{% endblock %}
+
+

@@ -1,0 +1,72 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+   Auction Instructions
+{% endblock %}
+
+{% block content %}
+
+<p>
+    In each round, everyone will be shown one pair of goods ({{ object_1 }} vs. {{ object_2 }}).
+    You have the option of buying one of two goods.
+</p>
+
+<ol>
+    <li>
+        Choose either {{ object_1 }} or {{ object_2 }} that you want to buy.
+    </li>
+    <li>
+        Indicate the highest price you would be willing to pay for the product by moving the slider.
+    </li>
+</ol>
+
+<p>
+    After you have finished, one of the prices listed the following screen will be selected at random.
+
+</p>
+
+<p>
+    If the price you indicated is <strong>equal to or greater than</strong> the randomly chosen price,
+    then you will receive the item.
+    {% if real %}
+    If this occurs,  <strong>you will actually get the item</strong>.
+    Otherwise, the system will simply tell you that you would have bought it.
+    {% else %}
+    The system will tell you if you would have bought the item, but you will not actually get any item
+    in these hypothetical rounds.
+    {% endif %}
+    <em>You do <strong>not</strong> pay the amount you indicated on the price list.
+        Instead, you pay the randomly chosen price,</em>
+        which may be lower than the price you indicated, and will certainly not be higher.
+</p>
+<p>
+    <em>Example: if you offer {{ example_bid }} and the randomly chosen price is {{ low_price }} then you will
+        receive the item and pay <strong>{{ low_price }}</strong>.</em>
+</p>
+<p>
+    If your offer is <strong>less than</strong> the randomly chosen price, then you do not buy the item.
+    Instead, you keep your money.
+    {% if real %}
+    Since this is a real round, you will actually get this money at the end of the experiment.
+    {% else %}
+    Since these are hypothetical rounds, you will see how much money you would get, but you
+    will not get any money.
+    {% endif %}
+</p>
+<p>
+    <em>Example: if you offer {{ example_bid }} and the randomly chosen price is {{ high_price }}, then you will
+        not receive the item but keep all of your money.</em>
+</p>
+<p>
+    As a buyer, <strong>you should offer exactly the maximum amount you would be willing to pay</strong>
+    in exchange for the item being sold.
+    Your best strategy is to determine how much you personally value the item,
+    and record that value as your offer.
+    There are no advantages to indicating any other price,
+    as making a lower offer will not lower the price you pay.
+</p>
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Payment Information
+{% endblock %}
+
+{% block content %}
+<h4><b> {{ date }} </b></h4>
+<br>
+
+<p class="custom">
+    Your interaction with your {{ interact_for_payment }} Partner was chosen for payment.
+    <br><br>
+    In that interaction, you and your partner played a total of {{ total_rounds }} rounds. Five rounds from
+    that interaction were picked at random. You will be paid based on the results from rounds {{ paying_rounds }}.
+    The results from those rounds are shown below.
+</p>
+
+<h4><b>Round history</b></h4>
+<font class="custom">
+    <table class="table">
+        <tr>
+            <th>Round</th>
+            <th>Result</th>
+            <th>Your Choice</th>
+            <th>Your Payoff in Round</th>
+        </tr>
+        {% for round_num, p in player_in_paying_rounds %}
+            <tr>
+                <td>{{ round_num }}</td>
+                <td>{{ p.round_result }}</td>
+                <td>{{ p.best_choice }}</td>
+                <td>{{ p.payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</font>
+
+<p class="custom">
+    <br><font size="4"><u><i>Please fill out your payment sheet with the following information:</i></u></font><br>
+    <b>(A) Show-up Payment: </b> $7.00
+    <br>
+    <b>(B) Dollars Earned During Session:</b> {{ total_earned_payoff }}
+    <br>
+    &emsp; &emsp; <i>Payoff from Round Results:  {{ cumulative_payoff }}</i>
+    <br>
+    &emsp; &emsp; <i>Payoff for Reaching Complete Agreement: {{ reach_eq_payoff }}</i>
+    <br>
+
+    <b><font color="#C62502">(C) Total Payoff: {{ total_payoff }}</font></b>
+    <br>
+    <b><font color="#C62502">(D) ROUNDED TOTAL (to nearest quarter): {{ rounded_total }}</font></b>
+</p>
+
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+</style>
+{% endblock %}
+
+

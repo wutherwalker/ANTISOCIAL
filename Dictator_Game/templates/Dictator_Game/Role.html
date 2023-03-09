@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Your Role in the Allocation Task
+{% endblock %}
+
+{% block content %}
+<h3>
+{% if sender %}
+    You have been assigned to be a <strong>chooser</strong> this round.
+{% else %}
+    You have been assigned to be an <strong>accepter</strong> this round.
+{% endif %}
+</h3>
+    {% next_button %}
+
+{% endblock %}

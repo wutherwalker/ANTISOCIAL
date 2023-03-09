@@ -1,0 +1,41 @@
+{% extends "HW2_Julius_StagHunt/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Welcome to our experiment.
+{% endblock %}
+
+{% block content %}
+
+<p>
+    In this experiment, you will be asked to make a series of simple choices.
+    Another participant in this experiment will also be making similar choices.
+    The amount of points you get in each round will depend upon both of your choices.
+</p>
+<p>
+    For each choice, there will be a table showing how your choices affect the
+    number of points that will be received by you and the other participant.
+    This table may change between rounds.
+</p>
+<p>
+    If you do not make a choice within 20 seconds, the computer will choose for you.
+</p>
+<p>
+    There will be a minimum of 5 rounds, and a maximum of 10 rounds. Each round will require you to make one choice.
+</p>
+<p>
+    After the first 5 rounds, at the end of each round, the computer will randomly determine
+    whether or not the experiment will continue to another round.
+    The probability of continuing to another round will be 9/20, which is 45%.
+    If there is a 10th round, the experiment will end after that round.
+</p>
+<p>
+    The computer will randomly select one round to be the paid round.
+    Any money you received in the paid round, plus {{ Constants.show_up_fee | c }} simply for participating,
+    will be paid to you at the end of the experiment.
+
+</p>
+
+    {% next_button %}
+
+{% endblock %}

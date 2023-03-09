@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block content %}
+  <h1>Welcome to the video experiment!</h1>
+  <p>
+    In this experiment, you will be watching several short videos and rating them based on their quality. For each video you rate, you will receive {{ Constants.payoff }} experiment coins.
+  </p>
+  <p>
+    Your total payout for this experiment will depend on the number of coins you earn.
+  </p>
+  {% next_button %}
+{% endblock %}

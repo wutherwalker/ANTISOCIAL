@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Allocation Instructions
+{% endblock %}
+
+{% block content %}
+<p>
+    You will be assigned randomly to be a chooser or an accepter each round.
+</p>
+<p>
+    If you are assigned to be a <strong>chooser</strong>, you will have a choice to make in each round.
+</p>
+<p>
+    If you are assigned to be a <strong>accepter</strong>, you will simply wait for the chooser to make a choice.
+</p>
+<p>
+    Each round, you will be randomly matched to another participant.
+    Chooses will always be matched to accepter and vice-versa.
+</p>
+<p>
+    After all rounds are done, one round out of the {{ num_rounds }} rounds will be randomly selected
+    to determine what you are paid.
+</p>
+<p>
+    Your final payoff will not be revealed to you until the experiment ends.
+</p>
+<p>
+    Your participation in the experiment and any information about your payoffs will be kept strictly confidential.
+    Your payment-receipt and participant form are the only places in which your name and ID number are recorded.
+    You will never be asked to reveal your identity to anyone during the course of the experiment.
+    Other participants will not be able to link you individually to any of your decisions.
+    In order to keep your decisions private, please do not reveal your choices to any other participant,
+    and please remain silent until the end of the experiment.
+</p>
+
+
+
+    {% next_button %}
+
+{% endblock %}

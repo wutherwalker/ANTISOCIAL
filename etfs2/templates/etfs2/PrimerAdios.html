@@ -1,0 +1,24 @@
+{% extends "etfs2/Basetf.html" %}
+
+{% load otree static %}
+
+{% block title %}
+End of this market
+{% endblock %}
+
+{% block content %}
+
+<p> You earned {{points_final }}</p>
+
+<p> You finished with {{cash_final}} of cash and with the following number of assets A and B,respectively ({{nassets_afinal}}, {{nassets_bfinal}}).</p>
+
+<p> The terminal value of assets A and B is {{pfinala}} and {{pfinala}} </p>
+
+<p> Your dividend earnings for the last period from A and B ({{diva}}, {{divb}})</p>
+</p>
+
+<p> You will be paid from one randomly chosen market. </p>
+
+  {% next_button %}
+
+{% endblock %}

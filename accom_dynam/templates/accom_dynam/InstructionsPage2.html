@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3: Tasks with Partners
+{% endblock %}
+
+{% block content %}
+
+    <h4>Instructions: 3 of 7</h4>
+
+    <p class="custom">
+        In each round, two items from the set will be randomly selected, labeled <u>Option 1</u> and <u>Option 2</u>.
+    </p>
+
+    <center><img src='{% static "accom_dynam/pics/comp_util_infographic1.png" %}' /></center>
+    <p>
+        <i>*This is a static picture.</i>
+    </p>
+
+
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+</style>
+{% endblock %}

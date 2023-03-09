@@ -1,0 +1,63 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome to our experiment.
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Welcome to this experiment in the economics of decision-making.
+
+    Please read these instructions carefully, as the cash payment you earn at the end of today’s session will depend on your choices.
+    If you have a question at any time, please raise your hand and the experimenter will come to your station to answer your question.
+
+    There is no talking for the duration of this {{ duration }} minute session.
+    Please turn off your cell phone and any other electronic devices.
+</p>
+<p>
+    If you wish to leave before the experiment is finished, you may do so, but you will only receive the show-up
+    fee of {{ show_up_fee }}.
+</p>
+<p>
+    There are {{ players_per_session }} participants in each session. You will participate in {{ num_rounds }} rounds of
+    decision-making using the networked computer workstations of the laboratory.
+    Prior to the first round, {{ half_session }} of the participants will be randomly assigned the role of
+    <span class="red">Red type</span> and the other {{ half_session }} the role of <span class="blue">Blue type</span>.
+    Your role as a <span class="red">Red type</span> or <span class="blue">Blue type</span>  will remain fixed for
+    all {{ num_rounds }} rounds.
+</p>
+{% if digit_span > 0 %}
+<p>
+    Each round, you will be asked to memorize a {{ digit_span }}-digit number.
+    You must report this number correctly in order to get your payoff for that round.
+</p>
+{% endif %}
+<p>
+    Click the "Next" button when you have finished reading these instructions and are ready to continue.
+</p>
+    {% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    title {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 16pt;
+        }
+
+    .red {
+        color: #FF0000;
+        }
+
+    .blue {
+        color: #0000FF;
+        }
+</style>
+{% endblock %}

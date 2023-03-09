@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3:Tasks with Partners
+{% endblock %}
+
+{% block content %}
+
+
+<h4>Instructions</h4>
+<p class="custom">
+    <b>The interaction with your Third Partner is about to begin.</b> <br>Your task is to create a model of his/her preferences
+    over <i>{{ num_items }} types of {{ item_type }}</i>.<br>
+    Your answer from this task will be sent to your partner so that he/she can start creating a model of your preferences.
+</p>
+<p class="custom">
+    Please pick the answer that best completes the following sentence:
+</p>
+
+<p class="custom">
+    <font color="#C62502"> <strong>I __________ {{random_outcome}} {{ item_type }}.</strong></font>
+</p>
+
+
+{% formfield player.likert_scale with label=""%}
+
+
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+</style>
+{% endblock %}

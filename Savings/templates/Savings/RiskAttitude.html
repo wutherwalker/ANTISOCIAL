@@ -1,0 +1,115 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Lotteries
+{% endblock %}
+
+{% block content %}
+<p>
+    Below is a list of lotteries you could choose to take or not.
+    There are two lotteries in each pair, lottery 1 and lottery 2.
+    Each lottery consists of two possible amounts you could receive.
+</p>
+<p>
+    For each pair, you must choose whether you would rather take lottery 1 or lottery 2.
+    Once you have chosen a lottery from each pair, the computer will randomly choose a lottery,
+    and then choose randomly whether you get the lower amount or the higher amount for that
+    lottery, each with a 50% chance.
+</p>
+<p>
+    The computer will randomly decide whether you are paid for these lotteries or the puzzle that follows,
+    each with a 50% chance.
+</p>
+
+{% formfields %}
+
+{% next_button %}
+
+{% endblock %}
+
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 14pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-weight: bold;
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+
+    .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 28pt;
+        font-style: italic;
+        }
+</style>
+{% endblock %}

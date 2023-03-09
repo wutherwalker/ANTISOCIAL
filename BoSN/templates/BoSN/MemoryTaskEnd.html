@@ -1,0 +1,92 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round {{ round_number }}
+{% endblock %}
+
+{% block content %}
+<p>
+    Please enter the number you were asked to memorize earlier.
+</p>
+
+{% formfield player.memory_number %}
+
+{% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    title {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+
+    .red {
+        color: #FF0000;
+        }
+
+    .blue {
+        color: #0000FF;
+        }
+
+    .announcement {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    .large {
+        font-size: 36pt;
+        background-color: #00CC00;
+        color: #000000;
+        border: none;
+        display: inline-block;
+        padding: 20px;
+        border-radius: 10px;
+        width: 100px;
+        }
+
+    .large:hover {
+        background-color: #006600;
+        }
+
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

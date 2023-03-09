@@ -1,0 +1,19 @@
+{% extends "etfs/Basetf.html" %}
+
+{% load otree static %}
+
+{% block title %}
+End of this experiment
+{% endblock %}
+
+{% block content %}
+
+<p> The computer randomly selected market {{market}} for your payout.</p>
+<p> Your total points from that market are {{points_final }}. </p>
+<p> In addition, you earned {{ bret_payoff }} in the bomb task.</p>
+<p> This brings your total points to {{ total_payoff }}, which converts to ${{points_indollars}} in dollars.</p>
+<p> In addition you will receive a ${{ show_up_fee }} show-up payment.</p>
+
+  {% next_button %}
+
+{% endblock %}

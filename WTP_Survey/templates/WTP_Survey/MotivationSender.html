@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Sender-Receiver Motivation
+{% endblock %}
+
+{% block content %}
+<p>
+    For the following questions, rate on a scale from 0 (not at all) to 10 (completely) how much
+    the listed motivation was a factor in making your decision in the
+    <strong>Sender-Receiver</strong> task.
+</p>
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,230 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round {{ subsession.round_number }}
+{% endblock %}
+
+{% block content %}
+<button type="button" id="ready"
+        onclick="{
+            document.getElementById('income').style.display = 'inline'
+            document.getElementById('hidden_stuff').style.display = 'inline'
+            var x = document.getElementById('id_contribution')
+            var y = document.getElementById('int_income')
+            x.max = Math.round(y.innerHTML)
+            x.value = Math.round(x.max * Math.random())
+            x.style.display = 'inline'
+            document.getElementById('ready').style.display = 'none'
+        }">Loading</button>
+
+<span id="hidden_stuff" style="display:none">
+    {% if income_change %}
+    <p class="important ">
+        Incomes have changed since last round. Read carefully.
+    </p>
+    {% endif %}
+    {% if condition_change %}
+    <p class="important"> The condition has changed. Read carefully. </p>
+    {% endif %}
+<p> You have been randomly assigned to a new group. The others in your group have the following starting amounts:</p>
+<table>
+    <tr>
+        {% for p in partners %}
+        <td> {{ p.gross_income }} </td>
+        {% endfor %}
+    </tr>
+</table>
+{% if player.revenue_return %}
+<p> You are in <span class="important">Condition B</span>. Tax money collected will be multiplied by {{ revenue_multiplier }},
+    and then shared equally with everyone in the group, including yourself.
+</p>
+{% else %}
+<p> You are in <span class="important">Condition A</span>. Tax money collected is simply lost.
+    Neither you nor anyone in your group will receive any part of it.
+</p>
+{% endif %}
+
+<span hidden id='int_income'>{{ gross_income }}</span>
+<p><span class="important" id="income" style="display:none"> You have {{ player.gross_income }}.</span>
+    Move this slider to choose the amount you wish to give to the group, then click Next.</p>
+<!-- Dynamically setting the maximum of this seems strangely difficult; I hate to have to copy-pasta -->
+<input type="range" min="0" max="30" value="15" class="slider" name="contribution" id="id_contribution" style="display:none"
+       oninput="{
+    output.innerHTML = this.value
+    var gross_income = document.getElementById('int_income').innerHTML
+    var contribution = document.getElementById('id_contribution').value
+    var taxable_income = Math.round(100*(gross_income - contribution))/100
+    var tax_paid = Math.round(100*(taxable_income * taxable_income / 40))/100
+    var after_tax_income = Math.round(100*(taxable_income - tax_paid))/100
+    var contribution_share = Math.round(100*contribution * 2.5/5)/100
+    var revenue_share = Math.round(100*tax_paid * 3/5)/100
+    var average_benefitA = Math.round(100*(contribution_share * 5 + after_tax_income))/100
+    var average_benefitB = Math.round(100*(contribution_share * 5 + revenue_share * 5 + after_tax_income))/100
+    var payoffA = Math.round(100*(after_tax_income + contribution_share))/100
+    var payoffB = Math.round(100*(after_tax_income + contribution_share + revenue_share))/100
+    document.getElementById('id_taxable_income').innerHTML = taxable_income
+    document.getElementById('id_tax_paid').innerHTML = tax_paid
+    document.getElementById('id_after_tax_income').innerHTML = after_tax_income
+    document.getElementById('id_contribution_share').innerHTML = contribution_share
+    document.getElementById('id_payoffA').innerHTML = payoffA
+    document.getElementById('id_average_benefitA').innerHTML = average_benefitA
+
+}"><span id="output"></span>
+<table>
+    <tr>
+        <th>Your taxable income would be:</th> <td id="id_taxable_income"></td>
+    </tr>
+    <tr>
+        <th>You would pay in taxes:</th> <td id="id_tax_paid"></td>
+    </tr>
+    <tr>
+        <th>You would receive in after-tax income:</th> <td id="id_after_tax_income"></td>
+    </tr>
+    <tr>
+        <th>Each person in your group would receive in contributions: </th> <td id="id_contribution_share"></td>
+    </tr>
+    {% if player.condition %}
+    <tr>
+        <th>Each person in your group would receive in tax revenue:</th><td id="id_revenue_share"></td>
+    </tr>
+    <tr>
+        <th>Your net payoff would be:</th> <td id="id_payoffB"></td>
+    </tr>
+    <tr>
+        <th>If everyone in your group chose this way, you would each get:</th> <td id="id_average_benefitB"></td>
+    </tr>
+    {% else %}
+    <tr>
+        <th>Your net payoff would be:</th> <td id="id_payoffA"></td>
+    </tr>
+    <tr>
+        <th>If everyone in your group chose this, you would each get:</th> <td id="id_average_benefitA"></td>
+    </tr>
+    {% endif %}
+</table>
+    <button id="next">Next</button>
+</span>
+
+{% if subsession.round_number > 1 %}
+<h3>History of previous rounds </h3>
+    <table class="history">
+        <tr>
+            <th>Round</th>
+            <th>Your Starting Amount</th>
+            <th>Your Contribution</th>
+            <th>Your Tax Paid </th>
+            <th class="important">Your Payoff</th>
+            <th>Average Contribution</th>
+            <th>Average Tax Paid</th>
+            <th>Average Payoff</th>
+        </tr>
+        {% for p in player_in_previous_rounds %}
+            <tr>
+                <td>{{ p.round_number }}</td>
+                <td>{{ p.gross_income }}</td>
+                <td>{{ p.contribution }}</td>
+                <td>{{ p.tax_paid }} </td>
+                <td class="important">{{ p.payoff }}</td>
+                <td>{{ p.get_average_contribution }}</td>
+                <td>{{ p.get_average_tax_paid }}</td>
+                <td>{{ p.get_average_payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+<br />
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            $('.otree-timer__time-left').on('update.countdown', function (event) {
+                if (event.offset.totalSeconds <= 75) {
+                    $('.otree-timer').show();
+                    $('#ready').click();
+                }
+            });
+        });
+    </script>
+
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 14pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+</style>
+{% endblock %}

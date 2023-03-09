@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+<p>
+    You will be assigned randomly to a sender or to a receiver and your role will remain same during the session.
+</p>
+<p>
+    The sender will learn the result of a coin flip performed by the computer.
+    This coin flip has equal chances of resulting in "Heads" or "Tails."
+    The sender then sends a message about this coin flip to the Receiver.
+    Only the sender knows the true outcome of the coin flip.
+</p>
+<p>
+    The receiver receives the message sent by the Sender, without observing the coin flip itself.
+    Once the Receiver receives this message from the Sender, the Receiver chooses an action: H or T.
+</p>
+<p>
+    The Receiver’s action, together with the result of the coin flip,
+    completely determines both the sender's and receiver's earnings for the round.
+</p>
+<p>
+    Each round, you will be randomly matched to another participant.
+    Senders will always be matched to receivers and vice-versa.
+</p>
+<p>
+    After all rounds is done, one round out of the {{ num_rounds }} rounds will be randomly selected
+    to determine what you are paid.
+</p>
+<p>
+    Your participation in the experiment and any information about your payoffs will be kept strictly confidential.
+    Your payment-receipt and participant form are the only places in which your name and ID number are recorded.
+    You will never be asked to reveal your identity to anyone during the course of the experiment.
+    Other participants will not be able to link you individually to any of your decisions.
+    In order to keep your decisions private, please do not reveal your choices to any other participant,
+    and please remain silent until the end of the experiment.
+</p>
+    {% next_button %}
+
+{% endblock %}

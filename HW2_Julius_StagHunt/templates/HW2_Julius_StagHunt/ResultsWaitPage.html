@@ -1,0 +1,161 @@
+{% extends 'otree/WaitPage.html' %}
+{% load otree static %}
+
+{% block title %}
+<div> Waiting for other participant </div>
+{% endblock %}
+
+{% block content %}
+
+<h3> Instructions </h3>
+
+<p>
+    The following table shows how many points each participant will receive, based on what both participants choose.
+</p>
+<p>
+    The first entry in each cell shows how many points you will get in each case.
+    The second entry in each cell shows how many points the other participant will get.
+</p>
+
+<table class="payoffs">
+    <tr>
+        <th></th>  {% if player.role == "Hunter 1" %}
+        <th class="H2"> They choose A</th><th class="H2"> They choose B</th>
+        {% else %}
+        <th class="H1"> They choose A</th><th class="H1"> They choose B</th>
+        {% endif %}
+    </tr>
+    <tr>
+        {% if player.role == "Hunter 1" %}
+        <th class="H1"> You choose A</th>
+        {% else %}
+        <th class="H2"> You choose A</th>
+        {% endif %}
+        <td>
+            {% if player.role == "Hunter 1" %}
+                <span class="H1" > {{ subsession.both_stag_payoff}} </span>,
+                <span class="H2" > {{ subsession.both_stag_payoff}} </span>
+            {% elif player.role == "Hunter 2" %}
+                <span class="H2" > {{ subsession.both_stag_payoff}} </span>,
+                <span class="H1" > {{ subsession.both_stag_payoff}} </span>
+            {% endif %}
+        </td>
+        <td>
+            {% if player.role == "Hunter 1" %}
+                <span class="H1" > {{ subsession.stag_alone_payoff }}</span>,
+                <span class="H2" > {{ subsession.h2_hare_payoff }} </span>
+            {% elif player.role == "Hunter 2" %}
+                <span class="H2" > {{ subsession.stag_alone_payoff }}</span>,
+                <span class="H1" > {{ subsession.h1_hare_payoff }} </span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        {% if player.role == "Hunter 1" %}
+        <th class="H1"> You choose B</th>
+        {% else %}
+        <th class="H2"> You choose B</th>
+        {% endif %}
+        <td> {% if player.role == "Hunter 1" %}
+                <span class="H1" > {{ subsession.h1_hare_payoff }} </span>,
+                <span class="H2" > {{ subsession.stag_alone_payoff }} </span>
+            {% elif player.role == "Hunter 2" %}
+                <span class="H2" > {{ subsession.h2_hare_payoff }} </span>,
+                <span class="H1" > {{ subsession.stag_alone_payoff }} </span>
+            {% endif %}
+        </td>
+        <td>
+            {% if player.role == "Hunter 1" %}
+                <span class="H1"> {{ subsession.h1_hare_payoff }} </span>,
+                <span class="H2"> {{ subsession.h2_hare_payoff }} </span>
+            {% elif player.role == "Hunter 2" %}
+                <span class="H2"> {{ subsession.h2_hare_payoff }} </span>,
+                <span class="H1"> {{ subsession.h1_hare_payoff }} </span>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+<br />
+
+{% if subsession.round_number > 1 %}
+<h3>History of previous rounds </h3>
+    <table class="history">
+        <tr>
+            <th>Round</th>
+            <th>Your Choice</th>
+            <th>Your Payoff</th>
+            <th>Their Choice</th>
+            <th>Their Payoff</th>
+        </tr>
+        {% for p in player_in_previous_rounds %}
+            <tr>
+                <td>{{ p.round_number }}</td>
+                <td>{{ p.decision }}</td>
+                <td>{{ p.payoff }}</td>
+                <td>{{ p.get_partner.decision }}</td>
+                <td>{{ p.get_partner.payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+<br />
+
+<h3> Decision for this round </h3>
+
+<p> You chose: {{ player.decision }}. </p>
+
+<p> You have already made your choice. Please wait for the other player to make a decision. </p>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    .H1 {
+        color: #770000;
+        font-weight: bold;
+        }
+    .H2 {
+        color: #007700;
+        font-style: italic;
+        }
+    th {
+        font-size: 24pt;
+        width: 300px;
+        text-align: center;
+        }
+
+    td {
+        font-size: 36pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 24pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 600px;
+        }
+
+    .history td {
+        font-size: 24pt;
+        }
+
+    .history th {
+        width: 150px;
+        }
+
+    h3 {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+</style>
+
+{% endblock %}

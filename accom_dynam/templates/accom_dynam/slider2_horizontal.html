@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.slidecontainer {
+    width: 80%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 80%;
+    height: 5px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 30%;
+    background: #FF0000;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+
+<div class="grid-container">
+    <div class="item item-1">
+        <div class="">
+          <input type="range" name="outcome2" min="-0.5" max="0.50" value="0" step= "0.01"  class="slider" id="myRange2" >
+          <p> <span id="demo"></span></p>
+        </div>
+    </div>
+    <div class="item item-2">
+        Dislike very much
+    </div>
+    <div class="item item-3">
+        Indifferent
+    </div>
+    <div class="item item-4">
+        Like very much
+    </div>
+    <!--<div class="item item-5">-->
+        <!--<button type="button" onclick="myFunction2()">Reset</button>-->
+    <!--</div>-->
+</div>
+
+<script>
+var slider2 = document.getElementById("myRange2");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value(show_value=False);
+
+slider2.oninput = function() {
+  output.innerHTML = this.value;
+}
+
+function myFunction2() {
+    document.getElementById("myRange2").value = "0";
+}
+</script>
+
+<style type="text/css">
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  grid-template-rows: auto auto auto;
+  justify-content: start;
+  align-content: start;
+}
+
+.item-1 {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: center stretch;
+}
+
+.item-2 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  place-self: center start;
+}
+
+.item-3 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  place-self: center center;
+}
+
+.item-4 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  place-self: center end;
+}
+
+.item-5 {
+  grid-column-start: 1;
+  grid-column-end: span 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  place-self: center center;
+}
+</style>
+
+</body>
+</html>

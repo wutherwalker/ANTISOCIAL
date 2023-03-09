@@ -1,0 +1,141 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Auction {% if real %} {% else %} round {{ round_number }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% if group_prime %}
+<p>
+    You are in the <span class="group_identity">{{ artist }} group.</span>
+    Your group mug is <span class="group_identity">{{ group_object }}.</span>
+</p>
+<p>
+    The number of people in your own group is {{ own_group_size }}.
+    The number of people in the other group is {{ other_group_size }}.
+</p>
+    {% if group_proportion_known %}
+    <p>
+        {{ group_proportion }} of participants chose their group mug in a previous study.
+    </p>
+    {% endif %}
+{% endif %}
+<table>
+    <tr>
+        <td>
+            <p>This is mug A:</p>
+            <img src="{% static object_A %}"/>
+        </td>
+        <td>
+            <p>This is mug B:</p>
+            <img src="{% static object_B %}"/>
+        </td>
+    </tr>
+</table>
+<p>
+    Which item would you prefer to buy?
+</p>
+{% formfield player.object_choice %}
+<p>
+    What is the highest price you would be willing to pay for that item?
+    Please indicate the price by moving the slider below.
+</p>
+    {% formfield player.bid %}
+
+    <br/>
+    <br/>
+
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 14pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+
+    .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 28pt;
+        font-style: italic;
+        }
+
+    .group_identity {
+        font-weight: bold;
+        font-size: 16pt;
+    }
+</style>
+{% endblock %}

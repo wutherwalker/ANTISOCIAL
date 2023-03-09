@@ -1,0 +1,48 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Auction {% if real %} {% else %} round {{ round_number }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<p>
+    You chose to bid {{ bid }} on {{ object_choice }}.
+</p>
+<p>
+    The randomly drawn price was {{ price }}.
+</p>
+{% if purchased %}
+<p>
+    You have purchased {{ object_choice }}!
+    {% if real %}
+    This is a real round, so you will actually receive
+    {% else %}
+    If this were a real round, you would receive
+    {% endif %}
+    {{ object_choice }} to take home.
+
+    After spending {{ price }} to make the purchase, you have {{ money_left }} remaining.
+</p>
+{% else %}
+<p>
+    You have not purchased {{ object_choice }}.
+    You have {{ money_left }} remaining.
+</p>
+{% endif %}
+<!--It's important whether it says 'the' or 'a' real round-->
+<p>
+    {% if real %}
+    Since this is the real round, this will be converted to
+    {% else %}
+    If this were a real round, this would be converted to
+    {% endif %}
+    {{ real_money }} in US dollars and paid to you in cash.
+</p>
+
+
+
+    {% next_button %}
+
+{% endblock %}

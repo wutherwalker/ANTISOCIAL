@@ -1,0 +1,24 @@
+{% extends "etfs/Basetf.html" %}
+
+{% load otree static %}
+
+{% block title %}
+End of this market
+{% endblock %}
+
+{% block content %}
+
+<p> Your dividend earnings from A, B and C in the last round are ({{diva}}, {{divb}}, {{divc}})</p>
+
+<p> You finished with {{cash_final}} of cash and with the following number of assets A, B and C, respectively ({{nassets_afinal}}, {{nassets_bfinal}}, {{nassets_cfinal}}).</p>
+
+<p> The terminal value of assets A, B and C is {{pfinala}}, {{pfinala}} and {{pfinalc}}. </p>
+
+<p> Therefore, you earned {{points_final }}.</p>
+
+
+<p> You will be paid from one randomly chosen market. </p>
+
+    {% next_button %}
+
+{% endblock %}

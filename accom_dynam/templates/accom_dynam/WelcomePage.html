@@ -1,0 +1,37 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome!
+{% endblock %}
+
+{% block content %}
+<p class="custom">
+     Welcome to the experiment. Thank you for your participation. This session will be divided into four stages, some completed
+     individually and some completed with a randomly paired partner:
+</p>
+
+<p class="custom">
+     <u>Stage 1</u>: Questionnaire A (about 3 minutes)<br> 
+     <u>Stage 2</u>: Individual Tasks (about 7 minutes) <br> 
+     <u>Stage 3</u>: Tasks with Partners (about 60 minutes)<br> 
+     <u>Stage 4</u>: Questionnaire B (about 15 minutes)<br> 
+ </p>
+
+<p class="custom">
+    You are guaranteed a $7 show-up fee. You will also have the opportunity to receive additional earnings based on yours and
+    your partner's decisions throughout Stages 2 and 3. You are free to leave at any time if you wish. However, leaving
+    before the session has ended means that you will receive only the $7 show-up fee and will forfeit any possible additional earnings.
+</p>
+
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+</style>
+{% endblock %}

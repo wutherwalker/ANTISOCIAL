@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 4: Tasks with Partners
+{% endblock %}
+
+{% block content %}
+
+    <h4>Instructions: 4 of 7</h4>
+
+    <p class="custom">
+        Based on where the <b>black</b> and <b><font color="red">red</font></b> items are placed on your current scale, the computer will calculate which
+        of the two options is implied to be <i>"most jointly beneficial"</i> for you and your partner as a group.
+        This will be called <i>"your choice"</i>.
+    </p>
+
+    <center><img src='{% static "accom_dynam/pics/comp_util_infographic2.png" %}' /></center>
+
+    <p>
+        <i>*This is a static picture.</i>
+    </p>
+
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+</style>
+{% endblock %}
+
+

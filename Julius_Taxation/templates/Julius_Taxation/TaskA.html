@@ -1,0 +1,72 @@
+{% extends "otree/WaitPage.html" %}
+{% load otree static %}
+
+{% block title %}
+    Please wait while other participants finish reading the instructions on this page.
+{% endblock %}
+
+{% block content %}
+<p>
+    You will be assigned to a different group of participants each round, chosen randomly.
+    There will always be a total of {{ Constants.players_per_group }} participants in your group, including yourself.
+</p>
+
+<p>
+    In each round, you will be given a certain <b>starting amount</b> . This amount may change between rounds.
+    You will have the option to give some or all of your <b>starting amount</b> to your group.
+    You will choose how much to give by moving a slider. The initial position of the slider will be set randomly each round.
+</p>
+<p>
+    You will have 1 minute, 15 seconds to make a decision in each round. If time runs out,
+    whatever the slider currently shows will be submitted as your choice.
+</p>
+
+<p>
+    Any points you choose to give will be multiplied by {{ donation_multiplier }},
+    and then shared equally with everyone in the group, including yourself.
+    This means that for each {{ 1 | c }} you choose to give, you will get back {{ Constants.MPCR_nonprofit | c}}.
+</p>
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        font-size: 18pt;
+        width: 300px;
+        text-align: center;
+        }
+
+    td {
+        font-size: 36pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 600px;
+        }
+
+    .history td {
+        font-size: 18pt;
+        }
+
+    .history th {
+        width: 150px;
+        }
+
+    h3 {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+</style>
+{% endblock %}

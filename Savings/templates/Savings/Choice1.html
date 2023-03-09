@@ -1,0 +1,285 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round {{ round_number }}, period 1
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Your income this period is {{ income }}.
+</p>
+<div id="income_graph"></div>
+<p>
+    You can borrow up to {{ max_borrow }} this period.
+</p>
+{% if constrained %}
+<p>
+    Remember, you will <em>not</em> be able to borrow next period.
+</p>
+{% endif %}
+<div id="consumption_graph"></div>
+<p>
+    How much do you want to consume this period? <strong><span id="id_output">1</span></strong>
+</p>
+<input type="range" min="1" max="{{ max_consumption | json }}" value="1" class="slider" name="consumption1"
+       id="id_consumption1" style="display:inline" step="0.1"
+       oninput="{
+    document.getElementById('id_output').innerHTML = this.value
+    payoff = {{ multiplier | json }} * Math.log(this.value)
+    savings = {{ income | json }} - this.value
+    if (savings >= 0) {
+        document.getElementById('id_verb').innerHTML = 'saved'
+    }
+    else {
+        document.getElementById('id_verb').innerHTML = 'borrowed'
+    }
+    document.getElementById('id_payoff').innerHTML = (Math.round(payoff*100)*0.01).toFixed(2)
+    document.getElementById('id_savings').innerHTML = (Math.round(Math.abs(savings)*10)*0.1).toFixed(1)
+}">
+<span id="id_errors">{{ form.consumption1.errors }} </span>
+<p>
+    If you consume that much, you will get a payoff this period of: <strong>$<span id="id_payoff">0.00</span></strong>.
+</p>
+<p>
+    Next period you will have <em><span id="id_verb">saved</span></em> <strong><span id="id_savings">{{ max_savings }}</span> points</strong>.
+</p>
+
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 14pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+
+    .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 28pt;
+        font-style: italic;
+        }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<!--<script src="https://code.highcharts.com/modules/exporting.js"></script>-->
+<!--<script src="https://code.highcharts.com/modules/export-data.js"></script>-->
+<script src="https://code.highcharts.com/themes/sand-signika.js"></script>
+<script>
+    Highcharts.chart('income_graph', {
+        chart: {
+            type: 'bar',
+            height: 100,
+        },
+
+        title: {
+            text: '',
+        },
+
+        subtitle: {
+            text: ''
+        },
+
+        yAxis: {
+            title: {
+                text: ''
+            },
+            min: {{ income_min | json }},
+            max: {{ income_max | json }},
+            tickInterval: 1,
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'middle',
+            reversed: true,
+        },
+
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+            },
+        },
+
+        xAxis: {
+            title: {
+                text: 'Points'
+            },
+            categories: [''],
+        },
+
+        series: [{
+            showInLegend: false,
+            name: 'Your Income',
+            data: [{{ income | json }}],
+            color: '#4444FF',
+        },
+        ],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+    Highcharts.chart('consumption_graph', {
+        chart: {
+            type: 'bar',
+            height: 150,
+        },
+
+        title: {
+            text: '',
+        },
+
+        subtitle: {
+            text: ''
+        },
+
+        yAxis: {
+            title: {
+                text: ''
+            },
+            min: {{ 1 | json }},
+            max: {{ max_consumption | json }},
+            tickInterval: 1,
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom',
+            reversed: true,
+        },
+
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+            },
+        },
+
+        xAxis: {
+            title: {
+                text: 'Points'
+            },
+            categories: [''],
+        },
+
+        series: [
+        {
+            showInLegend: true,
+            name: 'Available to Borrow',
+            data: [{{ max_borrow | json }}],
+            color: '#FFFF44',
+        },
+        {
+            showInLegend: true,
+            name: 'Your Income',
+            data: [{{ income | json }}],
+            color: '#4444FF',
+        },
+
+        ],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+</script>
+{% endblock %}

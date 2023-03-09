@@ -1,0 +1,43 @@
+{% extends "HW2_Julius_StagHunt/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Final Outcome
+{% endblock %}
+
+{% block content %}
+
+<p> Thank you for participating in our experiment. </p>
+
+<p> The round chosen to be paid was {{ paying_round }}.</p>
+
+<p> Your payoff in that round was {{ player.participant.payoff }}. </p>
+
+<p> The participation fee is {{ Constants.show_up_fee | c }}. </p>
+
+<p> Therefore you will receive {{ player.participant.payoff_plus_participation_fee | c }}. </p>
+
+<h3>History of all rounds </h3>
+    <table class="history">
+        <tr>
+            <th>Round</th>
+            <th>Your Choice</th>
+            <th>Your Payoff</th>
+            <th>Their Choice</th>
+            <th>Their Payoff</th>
+        </tr>
+        {% for p in player_in_all_rounds %}
+            <tr>
+                <td>{{ p.round_number }}</td>
+                <td>{{ p.decision }}</td>
+                <td>{{ p.payoff }}</td>
+                <td>{{ p.get_partner.decision }}</td>
+                <td>{{ p.get_partner.payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% next_button %}
+{% endblock %}
+
+

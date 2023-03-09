@@ -1,0 +1,152 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Results of round {{ round_number }}
+{% endblock %}
+
+{% block content %}
+
+{% if player_class == 1 or player_class == 2 %}
+<p>
+    You are a <span class="red">Red type</span>.
+</p>
+<ol>
+    <li>Payoff for <span class="red">RED</span> choosing X:
+        <span class="red">{{ high_payoff }} &#215; (number of others who chose X)</span></li>
+    <li>Payoff for <span class="red">RED</span> choosing Y:
+        <span class="red">{{ low_payoff }} &#215; (number of others who chose Y)</span> </li>
+</ol>
+{% else %}
+<p>
+    You are a <span class="blue">Blue type</span>.
+</p>
+<ol start="3">
+    <li>Payoff for <span class="blue">BLUE</span> choosing X:
+        <span class="blue">{{ low_payoff }} &#215;(number of others who chose X)</span></li>
+    <li>Payoff for <span class="blue">BLUE</span> choosing Y:
+        <span class="blue">{{ high_payoff }} &#215; (number of others who chose Y)</span> </li>
+</ol>
+{% endif %}
+
+{% if announce_treatment %}
+<p class = "announcement">
+    The announcement was: {{ announcement }}
+</p>
+{% endif %}
+
+<p>
+    You chose: {{ decision }}
+</p>
+
+<p>
+    In your group, {{ others_X }} others chose X and {{ others_Y }} others chose Y.
+</p>
+
+{% if digit_span > 0 %}
+{% if correct %}
+<p>
+    You entered the {{ digit_span }}-digit number correctly.
+</p>
+{% else %}
+<p>
+    You entered the {{ digit_span }}-digit number incorrectly.
+</p>
+{% endif%}
+{% endif %}
+
+<p>
+    Thus, your payoff for this round was: {{ payoff }}
+</p>
+
+    {% next_button %}
+
+{% if subsession.round_number > 1 %}
+<h3>History of previous rounds </h3>
+    <table class="history">
+        <tr>
+            <th>Round</th>
+            {% if announce_treatment %}
+            <th>Announcement </th>
+            {% endif %}
+            <th>Your Decision</th>
+            <th> Others who chose X </th>
+            <th> Others who chose Y </th>
+            <th class="important">Your Payoff</th>
+        </tr>
+        {% for p in player_in_previous_rounds %}
+            <tr>
+                <td>{{ p.round_number }}</td>
+                {% if announce_treatment %}
+                <td>{{ p.subsession.announcement }}</td>
+                {% endif %}
+                <td>{{ p.decision }} </td>
+                <td>{{ p.others_X }} </td>
+                <td>{{ p.others_Y }} </td>
+                <td class="important">{{ p.payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    title {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+
+    .red {
+        color: #FF0000;
+        }
+
+    .blue {
+        color: #0000FF;
+        }
+
+    .announcement {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

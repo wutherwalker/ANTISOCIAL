@@ -1,0 +1,58 @@
+
+     <table class="table" style="max-height:50%, max-width:50%">
+            <thead>
+                <tr>
+                    <!-- 3 colums: -->
+                    <th> Round </th>
+                    <th> Price A</th>
+                    <th> Units A</th>
+                    <th> Price B</th>
+                    <th> Units B</th>
+                    <th> Price C</th>
+                    <th> Units C</th>
+                    <th> NAV C </th>
+                    
+                </tr>
+            </thead>
+            
+            {% for seed in temp_A %}
+            {% for p in player_in_all_rounds %}
+            {% if p.subsession.round_number == seed %}
+            <tr>
+                <td> {{ p.subsession.ronda }}</td>
+                <td> 
+                {% if p.group.q_a > 0 %}
+                <b>{{p.group.p_a}} </b>
+                {% else %}
+                --
+                {% endif %} 
+                </td>
+                <td> {{p.group.q_a}}</td>
+
+                <td> 
+                {% if p.group.q_b > 0 %}
+                <b>{{p.group.p_b}} </b>
+                {% else %}
+                --
+                {% endif %} 
+                </td>
+                <td> {{p.group.q_b}}</td>
+
+                <td> 
+                {% if p.group.q_c > 0 %}
+                <b>{{p.group.p_c}} </b>
+                {% else %}
+                --
+                {% endif %} 
+                </td>
+                <td> {{p.group.q_c}}</td>
+                
+                <td> {{p.group.nav}} </td>
+
+            </tr>
+        {% endif %}    
+        {% endfor %}
+        {% endfor %}
+    </table>
+            
+                

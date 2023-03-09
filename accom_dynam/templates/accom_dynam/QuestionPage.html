@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 1: Questionnaire A
+{% endblock %}
+
+{% block content %}
+
+    <p class="custom">
+        <strong>Please answer the following questions to the best of your ability.</strong>
+    </p>
+
+<font class="custom">
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
+</font>
+
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+</style>
+{% endblock %}

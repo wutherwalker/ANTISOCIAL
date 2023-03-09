@@ -1,0 +1,70 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block content %}
+<p>
+    Welcome to our experiment. In this experiment, you will be randomly assigned to a group of participants.
+    The experiment will consist of {{ Constants.num_rounds }} rounds.
+    In each round, you and all the other participants in your group will make a choice.
+    The amount of points you receive for that round will depend on your choices and those of the other participants.
+</p>
+<p>
+    At the end of the experiment, a round will be chosen at random to be the paying round.
+    You will be paid whatever amount you received for that round.
+    You are guaranteed to receive at least {{ show_up_fee }} simply for participating.
+</p>
+    If at any time you wish to leave before the experiment is finished, you may do so;
+    if you leave early, you will only receive the participation fee of {{ show_up_fee }}.
+</p>
+<p>
+    Instructions are continued on the next page.
+    Click "Next" when you have finished reading the instructions on this page.
+</p>
+    {% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        font-size: 18pt;
+        width: 300px;
+        text-align: center;
+        }
+
+    td {
+        font-size: 36pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 600px;
+        }
+
+    .history td {
+        font-size: 18pt;
+        }
+
+    .history th {
+        width: 150px;
+        }
+
+    h3 {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+</style>
+{% endblock %}

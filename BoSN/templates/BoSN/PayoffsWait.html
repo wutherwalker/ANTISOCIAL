@@ -1,0 +1,109 @@
+{% extends "otree/WaitPage.html" %}
+{% load otree static %}
+
+{% block title %}
+    Payoffs
+{% endblock %}
+
+{% block content %}
+
+<p>
+    In each round, each participant in your group has to decide which one
+of two possible actions to choose, X or Y. The action choices that you
+and others in your group make determine what you get in each round,
+    according to the following rules:
+</p>
+<ol>
+    <li>Payoff for <span class="red">RED</span> choosing X:
+        <span class="red">{{ high_payoff }} &#215; (number of others who chose X)</span></li>
+    <li>Payoff for <span class="red">RED</span> choosing Y:
+        <span class="red">{{ low_payoff }} &#215; (number of others who chose Y)</span> </li>
+    <li>Payoff for <span class="blue">BLUE</span> choosing X:
+        <span class="blue">{{ low_payoff }} &#215;(number of others who chose X)</span></li>
+    <li>Payoff for <span class="blue">BLUE</span> choosing Y:
+        <span class="blue">{{ high_payoff }} &#215; (number of others who chose Y)</span> </li>
+</ol>
+<p>
+    These payoffs are summarized in the following tables:
+</p>
+<p>
+    For <span class="red">Red types</span>:
+</p>
+<table>
+    <tr>
+        <th> Others choose  </th><th>3X, 0Y</th><th>2X, 1Y</th><th>1X, 2Y</th><th>0X, 3Y</th>
+    </tr>
+    <tr>
+        <td class = "red">You choose X</td><td>{{ triple_high }}</td><td> {{ double_high }} </td><td> {{ high_payoff }} </td><td> {{ nothing }}  </td>
+    </tr>
+    <tr>
+        <td class = "red">You choose Y</td><td> {{ nothing }}  </td><td> {{ low_payoff }} </td><td> {{ double_low }} </td><td> {{ triple_low }}</td>
+    </tr>
+</table>
+<br />
+<p>
+    For <span class="blue">Blue types</span>:
+</p>
+<table>
+    <tr>
+        <th> Others choose </th><th>3X, 0Y</th><th>2X, 1Y</th><th>1X, 2Y</th><th>0X, 3Y</th>
+    </tr>
+    <tr>
+        <td class = "blue">You choose X</td><td>{{ triple_low }}</td><td> {{ double_low }} </td><td> {{ low_payoff }} </td><td> {{ nothing }} </td>
+    </tr>
+    <tr>
+        <td class = "blue">You choose Y</td><td> {{ nothing }} </td><td> {{ high_payoff }} </td><td> {{ double_high }} </td><td> {{ triple_high }}</td>
+    </tr>
+
+</table>
+<br />
+<p>
+    Please wait for the other participants to finish reading these instructions.
+</p>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    title {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 16pt;
+        }
+
+    .red {
+        color: #FF0000;
+        }
+
+    .blue {
+        color: #0000FF;
+        }
+
+    table {
+        table-layout: fixed;
+        width: 800px;
+        border: 1px solid black;
+        }
+
+    td {
+        font-size: 16pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+
+    th {
+        font-size: 16pt;
+        width: 100px;
+        text-align: center;
+        border: 1px solid black;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

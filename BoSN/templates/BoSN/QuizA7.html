@@ -1,0 +1,81 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Quiz
+{% endblock %}
+
+{% block content %}
+
+<p>
+    These questions will test your understanding of the instructions for this experiment.
+</p>
+<p>
+    Suppose you are a Blue type. If you choose Y, two others choose Y, and one other chooses X, how many points will you get?
+</p>
+<p>
+    You answered: <span class="important">{{ player.q7 }}</span>
+</p>
+{% if player.q7 == 18 %}
+<p class="green">
+    You are correct!
+</p>
+<p>
+    Click the "Next" button when you are ready to continue.
+</p>
+    {% next_button %}
+{% else %}
+<p class="darkred" >
+    You are incorrect!
+</p>
+<button class ="btn btn-back" name="back" value="1" > Continue </button>
+
+{% endif %}
+
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    title {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 16pt;
+        }
+
+    .red {
+        color: #FF0000;
+        }
+
+    .blue {
+        color: #0000FF;
+        }
+
+    .green {
+        color: #007700;
+        font-weight: bold;
+        }
+
+    .darkred {
+        color: #770000;
+        font-weight: bold;
+        }
+
+    .important {
+        font-weight: bold;
+        }
+
+    .btn-back {
+        color: #FFFFFF;
+        font-weight: bold;
+        display: inline-block;
+        padding: 10px;
+        border-radius: 2px;
+        width: 100px;
+        background-color: #990000;
+        }
+</style>
+{% endblock %}

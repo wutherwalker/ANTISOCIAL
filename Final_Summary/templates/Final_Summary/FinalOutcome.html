@@ -1,0 +1,148 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Conclusion (Please do not close this window.)
+{% endblock %}
+
+{% block content %}
+
+<p>
+    You have now completed the experiment.
+</p>
+{% if assign_groups %}
+<p>
+    You were assigned to the {{ artist }} group.
+    You earned {{ matching_money }} from the painting matching task.
+    This converts to {{ matching_money_real }} in US dollars.
+</p>
+{% endif %}
+{% if WTP_task %}
+<p>
+    In the real auction round,
+    {% if item_purchased %}
+    you purchased {{ object_choice }}, and had {{ WTP_payoff }} remaining.
+    {% else %}
+    you did not purchase an item, and kept the full {{ WTP_payoff }}.
+    {% endif %}
+    This converts to {{ WTP_payoff_real }} in US dollars.
+</p>
+{% endif %}
+{% if dictator_game %}
+<p>
+    In the allocation task, round {{ dictator_paying_round }} was chosen to be paid.
+    In that round, you received a payoff of {{ dictator_payoff }}.
+    This converts to {{ dictator_payoff_real }} in US dollars.
+</p>
+{% endif %}
+{% if trust_game %}
+<p>
+    In the sender-receiver task, round {{ trust_paying_round }} was chosen to be paid.
+    In that round, you received a payoff of {{ trust_payoff }}.
+    This converts to {{ trust_payoff_real }} in US dollars.
+</p>
+{% endif %}
+<p>
+    This brings your total earnings to {{ total_earnings }}.
+    Please write this number on your receipt.
+    You will be paid this amount in cash.
+</p>
+{% if item_purchased %}
+<p>
+    In addition, please indicate on your receipt that you purchased {{ object_choice }}.
+    You will receive this item.
+</p>
+{% endif %}
+<p>
+    You will also receive the {{ participation_fee }} participation fee.
+</p>
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 16pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+
+    .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 28pt;
+        font-style: italic;
+        }
+
+   .group_identity {
+        font-weight: bold;
+        font-size: 16pt;
+   }
+</style>
+{% endblock %}

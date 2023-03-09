@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+<p>
+    Welcome to our experiment. In this experiment you will be in a group of {{ market_size }} participants;
+    each of you will be acting in the role of a firm setting prices.
+</p>
+<p>
+    Your firms sell similar, but not identical products. If your price is higher than the average
+    price, you will lose some customers, but not all of them (unless the difference is very large).
+    If your price is lower than the average price, you will gain some customers, but again not
+    all of them (unless the difference is very large).
+</p>
+<p>
+    Market conditions will change over time. In each round, you will be given a payoff table
+    indicating what your profits will be given the prices you and other participants choose.
+    This payoff table may be the same or different between consecutive rounds, so read carefully.
+</p>
+<p>
+    One round will be randomly chosen to be the paying round. Your profits from that round
+    will be converted into dollars at a rate of {{ point_value }} per point.
+</p>
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Motivation
+{% endblock %}
+
+{% block content %}
+<p>
+    For the following questions, rate on a scale from -10 (completely the opposite is true)
+    to 10 (completely true) how much the statement is true for you, overall in all tasks.
+</p>
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}

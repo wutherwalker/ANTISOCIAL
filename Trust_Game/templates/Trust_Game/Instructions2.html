@@ -1,0 +1,122 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Sender-Receiver Instructions
+{% endblock %}
+
+{% block content %}
+
+{% if assign_groups %}
+<div class="group_identity">You are in {{ artist }} group.</div>
+{% endif %}
+
+<p>
+    Your final payoff will not be revealed to you until the experiment ends.
+</p>
+<p>
+    Your participation in the experiment and any information about your payoffs will be kept strictly confidential.
+    Your payment receipt and participant form are the only places in which your name and ID number are recorded.
+</p>
+<p>
+    You will never be asked to reveal your identity to anyone during the course of the experiment.
+    Neither the experimenters nor other participants will be able to link you to any of your decisions.
+    In order to keep your decisions private, please do not reveal your choices to any other participant.
+</p>
+<p>
+    Please do not talk with anyone during the experiment.
+    We ask everyone to remain silent until the end of the last round.
+</p>
+
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 14pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+
+    .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 28pt;
+        font-style: italic;
+        }
+
+   .group_identity {
+        font-weight: bold;
+        font-size: 16pt;
+   }
+</style>
+{% endblock %}

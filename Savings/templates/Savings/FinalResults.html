@@ -1,0 +1,180 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Final Results (Please do not close this window.)
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Thank you for participating in our experiment.
+</p>
+<p>
+    The round chosen to be paid for part 1 was {{ paying_round_1 }}.
+    Your payoff in that round was {{ paying_round_1_payoff }}.
+</p>
+<p>
+    The round chosen to be paid from part 2 was {{ paying_round_2 }}.
+    Your payoff in that round was {{ paying_round_2_payoff }}.
+</p>
+<p>
+{% if Hanoi_paid %}
+    The puzzle was chosen to be paid. In the puzzle, you earned:
+{% else %}
+    The gambles were chosen to be paid. Gamble {{ gamble }} was chosen to be real.
+    In that gamble, you earned:
+{% endif %}
+    {{ bonus_payoff }}
+</p>
+<p>
+    This brings your total earnings to {{ total_earnings }}.
+</p>
+<p>
+    In addition, you will receive a show-up fee of {{ participation_fee }}.
+</p>
+<p>
+    This brings your total payoff to {{ final_payoff }}.
+</p>
+
+<h3>History of all rounds</h3>
+<table class="history">
+    <tr>
+        <th> Round </th>
+        <th> Period 1 Income</th>
+        <th> Period 1 Savings</th>
+        <th> Period 1 Consumption</th>
+        <th> Period 2 Income</th>
+        <th> Period 2 Savings</th>
+        <th> Period 2 Consumption</th>
+        <th> Period 3 Income</th>
+        <th> Period 3 Consumption</th>
+        <th> Total Payoff </th>
+    </tr>
+    {% for player in player_in_all_rounds %}
+    <tr>
+        <td>
+            {% if player.round_number == paying_round_1 or player.round_number == paying_round_2 %}
+            <p><strong>PAYING ROUND </strong></p>
+            {% endif %}
+            {{ player.round_number }}
+        </td>
+        <td>
+            {{ player.income1 }}
+        </td>
+        <td>
+            {{ player.savings1 }}
+        </td>
+        <td>
+            {{ player.consumption1 }}
+        </td>
+        <td>
+            {{ player.income2 }}
+        </td>
+        <td>
+            {{ player.savings2 }}
+        </td>
+        <td>
+            {{ player.consumption2 }}
+        </td>
+        <td>
+            {{ player.income3 }}
+        </td>
+        <td>
+            {{ player.consumption3 }}
+        </td>
+        <td>
+            ${{ player.real_payoff_dollars }}.{{ player.real_payoff_cents }}
+        </td>
+    </tr>
+    {% endfor %}
+
+
+</table>
+{% endblock %}
+
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 14pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-weight: bold;
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+
+    .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 28pt;
+        font-style: italic;
+        }
+</style>
+{% endblock %}

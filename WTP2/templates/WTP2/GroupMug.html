@@ -1,0 +1,136 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+<p>
+    You are a member of the <span class="group_identity">{{ artist }} group.</span>
+    The group mug for the <span class="group_identity">{{ artist }} group is {{ group_object }}</span>.
+</p>
+<p>
+    The group mug represents your group affiliation in the <span class="group_identity">{{ artist }} group.</span>
+</p>
+{% if games %}
+<p>
+    <strong>The mug you buy (if any) and your group affiliation will be shown to your partner in the
+    next part of the experiment, and your partner's choices will affect your
+    final earnings.</strong>
+</p>
+<p>
+    Your partner may be a member of either the {{ artist }} group or the
+    {{ other_artist }} group. This will be chosen randomly.
+    There are {{ own_group_size }} participants in your group, and
+    {{ other_group_size }} participants in the other group.
+</p>
+<p>
+    <strong>Remember, whoever your partner is in the next part, that person will know
+    both which group you are in and which mug, if any, you purchased.</strong>
+</p>
+{% else %}
+<p>
+    <strong>The mug you buy (if any) and your group affiliation will be shown to others in the
+    next part of the experiment, but the choices of others will have no effect on your
+    final earnings.</strong>
+</p>
+<p>
+    <strong>Remember, others in your group will know which mug, if any, you purchased.</strong>
+</p>
+{% endif %}
+
+
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 14pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+
+    .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 28pt;
+        font-style: italic;
+        }
+
+    .group_identity {
+        font-weight: bold;
+        font-size: 16pt;
+    }
+</style>
+{% endblock %}

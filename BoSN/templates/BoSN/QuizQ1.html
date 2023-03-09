@@ -1,0 +1,46 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Quiz
+{% endblock %}
+
+{% block content %}
+
+<p>
+    These questions will test your understanding of the instructions for this experiment.
+</p>
+<p>
+    True or False: Once assigned to Red or Blue, I will remain Red or Blue for all {{ num_rounds }} rounds of the experiment.
+</p>
+{% formfield player.q1 label="" %}
+<p>
+    Click the "Next" button when you are ready to submit your answer.
+</p>
+<p>
+    Make sure your answer is correct before clicking the "Next" button.
+</p>
+    {% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    title {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 16pt;
+        }
+
+    .red {
+        color: #FF0000;
+        }
+
+    .blue {
+        color: #0000FF;
+        }
+</style>
+{% endblock %}

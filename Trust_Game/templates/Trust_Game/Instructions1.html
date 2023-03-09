@@ -1,0 +1,123 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Sender-Receiver Instructions
+{% endblock %}
+
+{% block content %}
+
+{% if assign_groups %}
+<div class="group_identity">You are in {{ artist }} group.</div>
+{% endif %}
+
+<p>
+    Now, we start the next part of the experiment.
+    The amount of money you earn will depend on the decisions you make and the decisions other people make.
+    Your payoff will be paid in private and in cash at the end of the session.
+</p>
+<p>
+    As the previous part of the experiment, it is important that you do not talk, in any way try to communicate,
+    with other people during the session.
+    If you have a question, raise your hand and an experimenter
+    will come over to where you are sitting and answer your question in private.
+</p>
+<p>
+    The experiment will consist of {{ num_rounds }} rounds.
+    One of these rounds will be randomly chosen to be the paying round.
+    In each round, you will be randomly matched with one other participant.
+    This matching will change each round.
+</p>
+
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 14pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+
+    .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 28pt;
+        font-style: italic;
+        }
+
+   .group_identity {
+        font-weight: bold;
+        font-size: 16pt;
+   }
+</style>
+{% endblock %}

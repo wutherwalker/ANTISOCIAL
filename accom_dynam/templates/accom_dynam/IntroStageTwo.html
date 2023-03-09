@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 2: Individual Tasks
+{% endblock %}
+
+{% block content %}
+<p class="custom">
+<ul class="custom">
+	<li> There will be 2 individual tasks </li>
+	<li> In one, you will elicit your preferences over different types of movie genres </li>
+	<li> In the other, you will elicit your preferences over different types of pizza </li>
+	<li> Given your responses to the tasks, the computer will generate a model of your preferences for movie genres and
+	    a model for pizzas types </li>
+
+
+</ul>
+</p>
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+</style>
+{% endblock %}

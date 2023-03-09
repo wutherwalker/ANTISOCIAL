@@ -1,0 +1,109 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Final Results
+{% endblock %}
+
+{% block content %}
+
+<p>
+    The paying rounds were randomly chosen to be {{ paying_round_1 }} and {{ paying_round_2 }}.
+</p>
+<p>
+    Your payoff in round {{ paying_round_1 }} was {{ round_1_payoff }}, which is worth {{ round_1_value }}.
+</p>
+<p>
+    Your payoff in round {{ paying_round_2 }} was {{ round_2_payoff }}, which is worth {{ round_2_value }}.
+</p>
+<p>
+    The show-up fee is {{ show_up_fee }}.
+</p>
+<p>
+    Therefore, your total payoff is {{ total_payoff }}. Please write this number on your receipt and sign your name.
+</p>
+
+
+<h3>History of previous rounds </h3>
+    <table class="history">
+        <tr>
+            <th>Round</th>
+            {% if announce_treatment %}
+            <th>Announcement </th>
+            {% endif %}
+            <th>Your Decision</th>
+            <th class="important">Your Payoff</th>
+        </tr>
+        {% for p in player_in_all_rounds %}
+            <tr>
+                <td>{{ p.round_number }}</td>
+                {% if announce_treatment %}
+                <td>{{ p.subsession.announcement }}</td>
+                {% endif %}
+                <td>{{ p.decision }} </td>
+                <td class="important">{{ p.payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    title {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+
+    .red {
+        color: #FF0000;
+        }
+
+    .blue {
+        color: #0000FF;
+        }
+
+    .announcement {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3: Tasks with Partners
+{% endblock %}
+
+{% block content %}
+
+
+<div class="grid-container">
+    <div class="item item-1">
+        <h4>Instructions: 1 of 7</h4>
+    </div>
+
+    <div class="item item-4">
+        <p class="custom">
+            <b><i>For each of the five interactions:</i></b>
+	    <ul class="custom">
+        <li> The interaction will consist of multiple rounds </li>
+        <li> An interaction must consist of at least five rounds to be eligible for payment </li>
+        <li> You will be shown a scale with some items in <b>black</b> and some in <b><font color="red">red</font></b> </li>
+		<li> The <b>black</b> items (left side of the scale) will represent the markers you previously set for each type of movie or type of pizza
+            combined into a single line. This will be your model of your preferences </li>
+		<li> The <b><font color="red">red</font></b> items (right side of the scale) will represent the model of your partner's preferences you
+            will be creating with help of the computer </li>
+
+
+        </ul>
+
+
+
+        <p class="custom">
+            Click NEXT when you are ready to proceed.
+        </p>
+    </div>
+
+</div>
+
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  justify-content: start;
+  align-content: start;
+}
+
+.item-1 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: end start;
+}
+
+.item-2 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: end center;
+}
+
+.item-3 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: end center;
+}
+
+.item-4 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  place-self: start start;
+}
+
+.item-5 {
+  grid-column-start: 2;
+  grid-column-end: span 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  place-self: center center;
+}
+
+.item-6 {
+  grid-column-start: 2;
+  grid-column-end: span 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  place-self: center center;
+}
+</style>
+{% endblock %}

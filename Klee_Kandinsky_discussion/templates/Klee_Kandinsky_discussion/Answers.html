@@ -1,0 +1,51 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Match the Artist to the Painting
+{% endblock %}
+
+{% block content %}
+<p>
+    As you are in the {{ artist }} group, we want you to know about paintings made by {{ artist }}.
+</p>
+<p>
+    Consider the paintings below.
+    Please select the artist who you think made each painting.
+</p>
+<table>
+    <tr>
+        <td>
+            <h2>
+                Painting A
+            </h2>
+            <img src="{% static painting_1_path %}"/>
+        </td>
+        <td>
+            <h2>
+                Painting B
+            </h2>
+            <img src="{% static painting_2_path %}"/>
+        </td>
+    </tr>
+</table>
+
+
+<p>
+    For each correct answer, you will be rewarded with an additional {{ answer_value }}.
+    You may recall {{ num_paintings }} pairs of paintings you have seen when you were assigned to the group.
+</p>
+
+<h2>
+My answers are:
+</h2>
+
+<h3>
+    Painting A is made by {% formfield player.painting_1 %}
+</h3>
+<h3>
+    Painting B is made by {% formfield player.painting_2 %}
+</h3>
+    {% next_button %}
+
+{% endblock %}

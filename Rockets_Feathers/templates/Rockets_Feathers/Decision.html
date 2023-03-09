@@ -1,0 +1,83 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round {{ round_number }}
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Your cost of production this round is {{ cost }} per unit.
+    The payoff table for this round is below.
+    In the table, the price you choose is indicated in <strong>bold</strong>:,
+    while the average price of all others in your group is indicated in <em>italics</em>.
+</p>
+<table>
+    <tr>
+        <td class="container">
+            <table class="choice">
+            {% for price in prices %}
+                <tr>
+                    <th>
+                        {{ price }}
+                    </th>
+                </tr>
+            {% endfor %}
+            </table>
+        </td>
+        <td class="container">
+            <table>
+                <tr>
+                {% for price in prices %}
+                    <th class="other_choice">
+                        {{ price }}
+                    </th>
+                    {% endfor %}
+                </tr>
+                {% for row in payoff_matrix %}
+                <tr>
+                {% for item in row %}
+                    <td>
+                        {{ item }}
+                    </td>
+                {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </td>
+    </tr>
+</table>
+<p>
+    What price do you choose?
+</p>
+{% formfield player.price %}
+
+    {% next_button %}
+
+{% endblock %}
+
+{% block styles %}
+<style type="text/css">
+table.choice {
+    font-size: 12pt;
+    position: relative;
+    top: 14px;
+}
+
+th.other_choice {
+    font-weight: normal;
+    font-style: italic;
+}
+
+.container {
+    border: 0px;
+    padding: 0px;
+}
+
+th, td {
+   border: 1px solid black;
+   text-align: center;
+}
+</style>
+{% endblock %}

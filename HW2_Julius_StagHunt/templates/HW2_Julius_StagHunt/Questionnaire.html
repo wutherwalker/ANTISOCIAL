@@ -1,0 +1,26 @@
+{% extends "HW2_Julius_StagHunt/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Post-Experiment Questionnaire
+{% endblock %}
+
+{% block content %}
+
+<p> You have completed all rounds. On the following page, we will determine the amount you are to be paid. </p>
+
+<p> Please complete the following questionnaire about yourself.
+    If you are uncomfortable answering any of these questions, you may leave them blank. </p>
+
+    {% formfield player.race label="Race/Ethnicity:" %}
+    {% formfield player.gender label="Gender:" %}
+    {% formfield player.age label="Age:" %}
+    {% formfield player.major label="Major:" %}
+    {% formfield player.income label="Household Income:" %}
+
+    {% next_button %}
+
+
+{% endblock %}
+
+

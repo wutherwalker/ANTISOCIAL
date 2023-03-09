@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Allocation Motivation
+{% endblock %}
+
+{% block content %}
+<p>
+    For the following questions, rate on a scale from 0 (not at all) to 10 (completely) how much
+    the listed motivation was a factor in making your decisions in the <strong>Allocation</strong> task.
+</p>
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}

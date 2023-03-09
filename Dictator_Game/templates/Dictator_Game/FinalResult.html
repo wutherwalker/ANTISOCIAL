@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Allocation Results
+{% endblock %}
+
+{% block content %}
+<p>
+    Round {{ paying_round }} was chosen to the be paying round.
+</p>
+<p>
+    In that round, you received a payoff of {{ payoff }}.
+</p>
+<p>
+    This converts to {{ real_payoff }} in US dollars.
+    In addition, you earned {{ matching_money }} from the painting-matching task.
+</p>
+<p>
+    This brings your total earnings to {{ total_earnings }}.
+</p>
+<p>
+    Finally, you will receive the {{ participation_fee }} participation fee.
+</p>
+{% endblock %}
+
+

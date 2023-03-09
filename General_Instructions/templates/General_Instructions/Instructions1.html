@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+<p>
+    This is an experiment in decision-making.
+    The amount of money you earn will depend on the decisions you make and on the decisions other people make.
+    Your earnings are given in points which will be converted to money at the end.
+</p>
+<p>
+    This experiment has several parts. The entire experiment should take less than 90 minutes to finish.
+    Your total earnings will be the sum of your earnings in each part.
+    At the end of the experiment you will be paid in cash with each point worth {{ token_value }} in US dollars.
+</p>
+<p>
+    In addition, you will be paid {{ show_up_fee }} for participation.
+    Everyone will be paid in private and you are under no obligation to tell others how much you earn.
+</p>
+<p>
+    Please do not talk with each other during the experiment.
+    If you have a question, feel free to raise your hand, and an experimenter will come to help you.
+</p>
+    {% next_button %}
+
+{% endblock %}

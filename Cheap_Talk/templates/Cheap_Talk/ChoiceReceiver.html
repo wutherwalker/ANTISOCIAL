@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Decision, round {{ round_number }} of {{ num_rounds }}
+{% endblock %}
+
+{% block content %}
+<p>
+    You are a <strong>receiver</strong>.
+</p>
+<p>
+    The sender sent the message {{ message }}.
+</p>
+<p>
+    Remember, you are in the {{ own_group }} group.
+</p>
+<p>
+    The sender is in the {{ other_group }} group.
+</p>
+{% if other_purchased %}
+<p>
+    The other player purchased {{ other_object_choice }}, which is the object associated
+    with the {{ object_group }} group.
+</p>
+{% else %}
+<p>
+    The other player did not purchase a mug in the previous part of the experiment.
+</p>
+{% endif %}
+<p>
+    What action would you like to choose?
+</p>
+
+{% formfield player.action %}
+
+    {% next_button %}
+
+{% endblock %}

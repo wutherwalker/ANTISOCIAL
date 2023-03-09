@@ -1,0 +1,43 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3: Tasks with Partners
+{% endblock %}
+
+{% block content %}
+
+<div class="grid-container">
+ 
+  <div class="item item-15">
+      <p class="custom">
+            A model of your preferences over pizza types and a model of your preferences over movie genres have been created
+          by the computer based on your previous answers.
+          <br> <br><b><i>In Stage 3:</i></b></p>
+        <ul class="custom">
+        <li> You will interact with 5 partners, one at a time </li>
+         <li> Each interaction will be carried out through a game and last around 12 minutes top </li>
+        <li> Through the game you will learn about the preferences over pizzas or movie genres of your partner </li>
+	    <li> With information and help provided by the computer, your task is to create a model of his/her preferences </li>
+        <li> At the same time, your partner will be learning about your preferences and creating a model of them </li>
+        <li> At the end of the experiment, one of the five interactions will be randomly chosen for payment. </li>
+        </ul>
+
+  </div>
+
+
+
+<center>
+
+&emsp; &emsp; &emsp; &emsp;
+<button class="otree-btn-next btn btn-primary" onClick="return checkUtilVals()" style="font-size:18px">Next</button>
+</center>
+</div>
+{% endblock %}
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+    </style>
+{% endblock %}

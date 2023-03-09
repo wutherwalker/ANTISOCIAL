@@ -1,0 +1,109 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+     Stage 3: Tasks with Partners
+{% endblock %}
+
+{% block content %}
+
+<h4>Instructions: 7 of 7</h4>
+
+<p class="custom">
+    <br>
+    One of the 5 interactions you play will be picked at random. Additional payoff for your participation in the experiment will be determined from the results of that interaction.
+    <br><br>
+    Payoffs for decisions made in an interaction are as follows:
+    <ul class="custom">
+        <li>
+            If you and your partner reach <b>"complete agreement"</b> you will receive $4.00.</li>
+	<ul style="list-style-type:circle" class="custom">
+		<li> <i>Complete agreement is reached if you and your partner have agreements for ten consecutive rounds </i>  </li>
+        </ul><p></p>
+        <li>
+            In addition, five rounds will be picked at random for payment:
+        </li>
+        <ul style="list-style-type:circle" class="custom">
+            <li>
+                For each of those rounds that results in a <b>disagreement</b>, you will receive nothing.
+            </li>
+            <li>
+                For each of those rounds that results in an <b>agreement</b>, your payoff will be dependent on how much
+                you personally like the agreed upon option. The table below summarizes all possible payoffs you could earn in
+                a round based on what the agreed upon option is*:
+            </li>
+    </ul>
+
+</p>
+
+<div class="grid-container">
+  <div class="item item-1">
+      <font class="custom">
+         <table class="table">
+            <tr>
+                <th>Option</th>
+                <th>Round Payoff</th>
+
+            </tr>
+            {% for type, payoff in movie_types_payoffs %}
+                <tr>
+                    <td>{{ type }}</td>
+                    <td>${{ payoff }}</td>
+                </tr>
+            {% endfor %}
+         </table>
+      </font>
+  </div>
+  <div class="item item-2">
+      <font class="custom">
+         <table class="table">
+            <tr>
+                <th>Option</th>
+                <th>Round Payoff</th>
+
+            </tr>
+            {% for type, payoff in pizza_types_payoffs %}
+                <tr>
+                    <td>{{ type }}</td>
+                    <td>${{ payoff }}</td>
+                </tr>
+            {% endfor %}
+         </table>
+      </font>
+  </div>
+</div>
+<p><font size="3"> <i>*You will have a table with the possible payoffs throughout the game </i></font></p>
+
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto ;
+  justify-content: start;
+  align-content: start;
+  grid-column-gap: 50px
+}
+
+.item-1 {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  place-self: center end;
+}
+
+.item-2 {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+  place-self: center start;
+}
+</style>
+{% endblock %}
+

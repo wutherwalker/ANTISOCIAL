@@ -1,0 +1,124 @@
+{% extends 'otree/WaitPage.html' %}
+{% load otree static %}
+
+{% block title %}
+Waiting for other participants
+{% endblock %}
+
+{% block content %}
+
+<h3> Decision for this round </h3>
+
+<p>The others in your group started with the following amounts:</p>
+<table>
+    <tr>
+        {% for p in partners %}
+        <td> {{ p.gross_income }} </td>
+        {% endfor %}
+    </tr>
+</table>
+
+<p> You started with a gross income of : {{ player.gross_income }}.</p>
+<p> You chose to contribute: {{ player.contribution }}. </p>
+
+<p> You have already made your choice. Please wait for the other participants to make a decision. </p>
+
+{% if subsession.round_number > 1 %}
+<h3>History of previous rounds </h3>
+    <table class="history">
+        <tr>
+            <th>Round</th>
+            <th>Your Starting Amount</th>
+            <th>Your Contribution</th>
+            <th>Your Tax Paid </th>
+            <th class="important">Your Payoff</th>
+            <th>Average Contribution</th>
+            <th>Average Tax Paid</th>
+            <th>Average Payoff</th>
+        </tr>
+        {% for p in player_in_previous_rounds %}
+            <tr>
+                <td>{{ p.round_number }}</td>
+                <td>{{ p.gross_income }}</td>
+                <td>{{ p.contribution }}</td>
+                <td>{{ p.tax_paid }} </td>
+                <td class="important">{{ p.payoff }}</td>
+                <td>{{ p.get_average_contribution }}</td>
+                <td>{{ p.get_average_tax_paid }}</td>
+                <td>{{ p.get_average_payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+<br />
+
+<br />
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 18pt;
+        width: 700px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 18pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 16pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+</style>
+{% endblock %}

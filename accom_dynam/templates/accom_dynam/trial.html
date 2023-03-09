@@ -1,0 +1,225 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Stage 3: Tasks with Partners
+{% endblock %}
+
+{% block content %}
+<h4>Round {{ round_number }}</h4>
+
+<div class="grid-container">
+  <div class="item item-1">
+      <font class="custom"><u>Option 1:</u></font>
+  </div>
+  <div class="item item-2">
+      <font class="custom"><u>Option 2:</u></font>
+  </div>
+  <div class="item item-3">
+      <font class="custom">{{ option1 }}</font>
+  </div>
+  <div class="item item-4">
+      <font class="custom">{{ option2 }}</font>
+  </div>
+  <div class="item item-5">
+      <font class="custom">Your choice: <b>{{ self_best_choice }}</b></font>
+  </div>
+  <div class="item item-6">
+      <font class="custom">Your partner's choice: <b>{{ opp_best_choice }}</b></font>
+  </div>
+  <div class="item item-7">
+      {% if result == "Agree" %}
+        <p class="custom">
+            You and your partner had an <b>agreement</b> about what type of {{ item_type }} is most jointly beneficial.
+        </p>
+      {% else %}
+        <p class="custom">
+            You and your partner had a <b>disagreement</b> about what type of {{ item_type }} is most jointly beneficial.
+        </p>
+      {% endif %}
+  </div>
+  <div class="item item-8">
+      <p class="custom">
+          <i><b>Recall:</b></i><br>
+          You can adjust your model of your partner by clicking one of the red labels and
+          dragging it up or down.
+      </p>
+      <p class="custom">
+          When you are ready to move on, click NEXT.
+      </p>
+  </div>
+  <div class="item item-9">
+      <font class="custom">Your Model</font>
+  </div>
+  <div class="item item-10">
+      <font class="custom" color="red">Your Model of Your Partner</font>
+  </div>
+  <div class="item item-11" id="util_scales">
+      {% include 'accom_dynam/comp_util_utility_scales.html' %}
+  </div>
+  <div class="item item-12" id="payoffs">
+      <table class="table">
+          <tr>
+              <th>Option</th>
+              <th>Round Payoff</th>
+
+          </tr>
+         {% for type, payoff in table %}
+                <tr>
+                    <td>{{ type }}</td>
+                    <td>${{ payoff }}</td>
+                </tr>
+         {% endfor %}
+      </table>
+
+  </div>
+</div>
+
+<button class="otree-btn-next btn btn-primary" onclick="setUtilVals()" style="font-size:18px">Next</button>
+
+<input type="hidden" name="opp_util_model_1" id="opp_util_model_1" value="0"/>
+<input type="hidden" name="opp_util_model_2" id="opp_util_model_2" value="0"/>
+<input type="hidden" name="opp_util_model_3" id="opp_util_model_3" value="0"/>
+<input type="hidden" name="opp_util_model_4" id="opp_util_model_4" value="0"/>
+<input type="hidden" name="opp_util_model_5" id="opp_util_model_5" value="0"/>
+{% if num_items == 8 %}
+    <input type="hidden" name="opp_util_model_6" id="opp_util_model_6" value="0"/>
+    <input type="hidden" name="opp_util_model_7" id="opp_util_model_7" value="0"/>
+    <input type="hidden" name="opp_util_model_8" id="opp_util_model_8" value="0"/>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    function setUtilVals() {
+        num_items = {{ num_items|json }}
+        document.getElementById("opp_util_model_1").value = otherUtilities[0];
+        document.getElementById("opp_util_model_2").value = otherUtilities[1];
+        document.getElementById("opp_util_model_3").value = otherUtilities[2];
+        document.getElementById("opp_util_model_4").value = otherUtilities[3];
+        document.getElementById("opp_util_model_5").value = otherUtilities[4];
+        if(num_items == 8) {
+            document.getElementById("opp_util_model_6").value = otherUtilities[5];
+            document.getElementById("opp_util_model_7").value = otherUtilities[6];
+            document.getElementById("opp_util_model_8").value = otherUtilities[7];
+        }
+     }
+
+</script>
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 150px 150px 150px 150px 200px;
+  grid-template-rows: auto auto auto auto auto auto;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  justify-content: center;
+  align-content: start;
+}
+
+.item-1 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: end center;
+}
+
+.item-2 {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: end center;
+}
+
+.item-3 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  place-self: center center;
+}
+
+.item-4 {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  place-self: center center;
+}
+
+.item-5 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  place-self: end start;
+}
+
+.item-6 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  place-self: start start;
+}
+
+.item-7 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 5;
+  grid-row-end: 6;
+  place-self: center start;
+}
+
+.item-8 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 6;
+  grid-row-end: 7;
+  place-self: center start;
+}
+
+.item-9 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: center center;
+}
+
+.item-10 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: center stretch;
+}
+
+.item-11 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: span 5;
+  place-self: center center;
+}
+.item-12 {
+  grid-column-start: 5;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: span 5;
+  place-self: center center;
+}
+
+</style>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "otree/WaitPage.html" %}
+{% load otree static %}
+{% load static %}
+
+{% block title %}
+   Please wait while other participants finish reading the instructions on this page.
+{% endblock %}
+
+{% block content %}
+
+<p>
+    The following equations summarize the payoffs:
+</p>
+<p class="equation">
+    A - C = B
+</p>
+<p class="equation">
+    B - D = E
+</p>
+{% if player.revenue_return %}
+
+<p class="equation">
+    E + {{ Constants.MPCR_nonprofit | json }} C + {{ Constants.MPCR_government | json }} D = F
+</p>
+{% else %}
+<p class="equation">
+    E + {{ Constants.MPCR_nonprofit | json }} C = F
+</p>
+{% endif %}
+<ul>
+    <li> (A) Your starting amount </li>
+    <li> (C) Your contribution </li>
+    <li> (B) Your taxable income</li>
+    <li> (D) The tax you pay</li>
+    <li> (E) Your after-tax income </li>
+    <li> (F) Your net payoff </li>
+</ul>
+<p> Your total payoff will be equal to your net payoff,
+    plus whatever you receive in contributions {% if player.revenue_return %} and tax revenue {% endif %} from the group.
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        font-size: 18pt;
+        width: 300px;
+        text-align: center;
+        }
+
+    td {
+        font-size: 36pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 600px;
+        }
+
+    .history td {
+        font-size: 18pt;
+        }
+
+    .history th {
+        width: 150px;
+        }
+
+    h3 {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    .equation {
+        font-size: 28pt;
+        font-style: italic;
+     }
+</style>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "HW2_Julius_StagHunt/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Results of Round {{ subsession.round_number }}
+{% endblock %}
+
+{% block content %}
+
+<h3> This round </h3>
+
+<p> You chose {{ player.decision }}.</p>
+
+<p> You received a payoff of {{ player.payoff | c}}. </p>
+
+<p> The other participant chose {{ player.get_partner.decision }}. </p>
+
+<p> They received a payoff of {{ player.get_partner.payoff }}. </p>
+
+<p> Your total payoff so far is {{ player.participant.payoff }}. </p>
+
+{% if player.decision == "A" and player.get_partner.decision == "A" %}
+<img src="{% static 'glassy-smiley-good.svg' %}" height="100" width="100" />
+{% else %}
+<img src="{% static 'glassy-smiley-bad.svg' %}" height="100" width="100" />
+
+{% endif %}
+
+{% if subsession.round_number > 1 %}
+<h3>History of previous rounds </h3>
+    <table class="history">
+        <tr>
+            <th>Round</th>
+            <th>Your Choice</th>
+            <th>Your Payoff</th>
+            <th>Their Choice</th>
+            <th>Their Payoff</th>
+        </tr>
+        {% for p in player_in_previous_rounds %}
+            <tr>
+                <td>{{ p.round_number }}</td>
+                <td>{{ p.decision }}</td>
+                <td>{{ p.payoff }}</td>
+                <td>{{ p.get_partner.decision }}</td>
+                <td>{{ p.get_partner.payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% next_button %}
+{% endblock %}
+
+

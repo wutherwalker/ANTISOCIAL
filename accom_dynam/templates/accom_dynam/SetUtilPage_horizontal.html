@@ -1,0 +1,190 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 2: Individual Task 1
+{% endblock %}
+
+{% block content %}
+
+
+<h4>Instructions</h4>
+
+<p class="custom">
+    You have been given a set of {{ num_items }} types of {{ item_type }}. On the scales below,
+    please indicate how much you like/dislike each option. The red mark represents your choice. The center of the line
+    implies indifference, the left end point represents highest possible dislike, and the right end point represents
+    highest possible liking. The farther you move the marker to the left, the more you dislike the option. The farther
+    you move the marker to the right, the more you like the option. Two options cannot have the same placement on the
+    line. Once you are satisfied with your placements, please click next.
+</p>
+
+
+<h4>{{outcomes.0}}</h4>
+<center>
+    {% include 'accom_dynam/slider1.html' %}
+</center>
+
+<h4>{{outcomes.1}}</h4>
+<center>
+    {% include 'accom_dynam/slider2.html' %}
+</center>
+
+<h4>{{outcomes.2}}</h4>
+<center>
+    {% include 'accom_dynam/slider3.html' %}
+</center>
+
+<h4>{{outcomes.3}}</h4>
+<center>
+    {% include 'accom_dynam/slider4.html' %}
+</center>
+
+<h4>{{outcomes.4}}</h4>
+<center>
+    {% include 'accom_dynam/slider5.html' %}
+</center>
+
+{% if num_items == 8 %}
+
+    <h4>{{outcomes.5}}</h4>
+    <center>
+        {% include 'accom_dynam/slider6.html' %}
+    </center>
+
+    <h4>{{outcomes.6}}</h4>
+    <center>
+        {% include 'accom_dynam/slider7.html' %}
+    </center>
+
+    <h4>{{outcomes.7}}</h4>
+    <center>
+        {% include 'accom_dynam/slider8.html' %}
+    </center>
+
+{% endif %}
+
+
+
+<br>
+<center>
+<button class="otree-btn-next btn btn-primary" type="button" onClick="resetUtils()" style="font-size:18px">Reset All Scales</button>
+&emsp; &emsp; &emsp; &emsp;
+<button class="otree-btn-next btn btn-primary" onClick="return checkUtilVals()" style="font-size:18px">Next</button>
+</center>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    function resetUtils() {
+        document.getElementById("myRange1").value = "0";
+        document.getElementById("myRange2").value = "0";
+        document.getElementById("myRange3").value = "0";
+        document.getElementById("myRange4").value = "0";
+        document.getElementById("myRange5").value = "0"
+        if ({{ num_items }} == 8) {
+            document.getElementById("myRange6").value = "0";
+            document.getElementById("myRange7").value = "0";
+            document.getElementById("myRange8").value = "0";
+        }
+    }
+
+    function isEqual(value, other) {
+        // Get the value type
+        var type = Object.prototype.toString.call(value);
+
+        // If the two objects are not the same type, return false
+        if (type !== Object.prototype.toString.call(other)) return false;
+
+        // If items are not an object or array, return false
+        if (['[object Array]', '[object Object]'].indexOf(type) < 0) return false;
+
+        // Compare the length of the length of the two items
+        var valueLen = type === '[object Array]' ? value.length : Object.keys(value).length;
+        var otherLen = type === '[object Array]' ? other.length : Object.keys(other).length;
+        if (valueLen !== otherLen) return false;
+
+        // Compare two items
+        var compare = function (item1, item2) {
+            // Code will go here...
+        };
+
+        // Compare properties
+        var match;
+        if (type === '[object Array]') {
+            for (var i = 0; i < valueLen; i++) {
+                compare(value[i], other[i]);
+            }
+        } else {
+            for (var key in value) {
+                if (value.hasOwnProperty(key)) {
+                    compare(value[key], other[key]);
+                }
+            }
+        }
+
+        // If nothing failed, return true
+        return true;
+    };
+
+    function checkUtilVals() {
+        utils = [document.getElementById("myRange1").value, document.getElementById("myRange2").value, document.getElementById("myRange3").value, document.getElementById("myRange4").value];
+        var counts = [], prev;
+
+        utils.sort();
+        for ( var i = 0; i < utils.length; i++ ) {
+            if ( utils[i] !== prev ) {
+                counts.push(1);
+            } else {
+                counts[counts.length-1]++;
+            }
+            prev = utils[i];
+        };
+
+        if (isEqual(counts, [1,1,1,1])) {
+            return true;
+        } else {
+            alert("WARNING: Make sure all genres have unique values before proceeding.");
+            return false;
+        };
+
+    }
+</script>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto;
+  justify-content: start;
+  align-content: start;
+}
+
+.item-1 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: center start;
+}
+
+.item-2 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2
+  place-self: center end;
+}
+</style>
+{% endblock %}
+

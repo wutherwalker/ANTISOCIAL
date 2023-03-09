@@ -1,0 +1,55 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Cash Payment and Administration
+{% endblock %}
+
+{% block content %}
+
+<p>
+    The computer randomly selects 2 rounds out of the {{ num_rounds }} rounds to calculate your cash payment.
+    (So it is in your best interest to take each round seriously.) The sum of the points you earned in the
+    2 selected rounds will be converted into cash at an exchange rate of {{ exchange_rate }} per point.
+    Your total cash payment at the end of the experiment will be this cash amount plus a {{ show_up_fee }} show-up fee.
+</p>
+<p>
+    Your decisions as well as your monetary payment will be kept confidential. Remember that
+    you have to make your decisions entirely on your own; please do not discuss your decisions with
+    any other participants.
+</p>
+<p>
+    Upon finishing the experiment, you will receive your cash payment. You will be asked to sign
+    your name to acknowledge your receipt of the payment. You are then free to leave.
+</p>
+<p>
+    If you have any question, please raise your hand now. We will answer your question individually.
+    If there are no questions, we will proceed to the quiz.
+</p>
+<p>
+    Click the "Next" button when you have finished reading these instructions and are ready to continue.
+</p>
+    {% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    title {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 16pt;
+        }
+
+    .red {
+        color: #FF0000;
+        }
+
+    .blue {
+        color: #0000FF;
+        }
+</style>
+{% endblock %}

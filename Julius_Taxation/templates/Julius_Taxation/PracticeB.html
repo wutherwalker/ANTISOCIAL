@@ -1,0 +1,130 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Practice
+{% endblock %}
+
+{% block content %}
+<p>
+    This page is for practice.
+    Nothing you do on this page will affect what you are paid at the end of the experiment.
+    For this practice round,tax money collected will be multiplied by {{ revenue_multiplier }},
+    and then shared equally with everyone in the group.
+</p>
+<p>Your starting amount is {{ 15.00 | c }} (A). Move the slider to choose how much you want to contribute (C):</p>
+<input type="range" min="0" max="15" value="7.5" class="slider" name="contribution" id="id_contribution" oninput="{
+    output.innerHTML = this.value
+    var contribution = document.getElementById('id_contribution').value
+    var taxable_income = Math.round(100*({{ endowment | json }} - contribution))/100
+    var tax_paid = Math.round(100*(taxable_income * taxable_income / {{ Constants.tax_maximum | json }}))/100
+    var after_tax_income = Math.round(100*(taxable_income - tax_paid))/100
+    var contribution_share = Math.round(100*contribution * {{ Constants.MPCR_nonprofit | json }})/100
+    var revenue_share = Math.round(100*tax_paid * {{ Constants.MPCR_government | json }})/100
+    var average_benefitA = Math.round(100*(contribution_share * {{ N | json }} + after_tax_income))/100
+    var average_benefitB = Math.round(100*(contribution_share * {{ N | json }} + revenue_share * {{ N | json }} + after_tax_income))/100
+    var payoffA = Math.round(100*(after_tax_income + contribution_share))/100
+    var payoffB = Math.round(100*(after_tax_income + contribution_share + revenue_share))/100
+    document.getElementById('id_taxable_income').innerHTML = taxable_income
+    document.getElementById('id_tax_paid').innerHTML = tax_paid
+    document.getElementById('id_after_tax_income').innerHTML = after_tax_income
+    document.getElementById('id_contribution_share').innerHTML = contribution_share
+    document.getElementById('id_revenue_share').innerHTML = revenue_share
+    document.getElementById('id_payoffB').innerHTML = payoffB
+    document.getElementById('id_average_benefitB').innerHTML = average_benefitB
+}"><span id="output"></span>
+<table>
+    <tr>
+        <td>Your taxable income (B) would be: <td id="id_taxable_income"></td>
+    </tr>
+    <tr>
+        <td>You would pay in taxes (D):</td> <td id="id_tax_paid"></td>
+    </tr>
+    <tr>
+        <td>You would receive in after-tax income (E):</td> <td id="id_after_tax_income"></td>
+    </tr>
+    <tr>
+        <td>Each person in your group would receive in contributions ({{ Constants.MPCR_nonprofit }} C): </td> <td id="id_contribution_share"></td>
+    </tr>
+    <tr>
+        <td>Each person in your group would receive in tax revenue ({{ Constants.MPCR_government }} D):</td><td id="id_revenue_share"></td>
+    </tr>
+    <tr>
+        <td>Your net payoff would be (F):</td> <td id="id_payoffB"></td>
+    </tr>
+    <tr>
+        <td>If everyone in your group chose this way, each person's total payoff would be:</td> <td id="id_average_benefitB"></td>
+    </tr>
+</table>
+
+<p>Click "Next" when you have finished practicing and are ready to move on.</p>
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        font-size: 18pt;
+        width: 300px;
+        text-align: center;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 16pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .tax {
+        width: 800 px;
+        }
+
+    .tax th {
+        width: 400 px;
+        }
+
+    .history td {
+        font-size: 18pt;
+        }
+
+    .history th {
+        width: 150px;
+        }
+
+    h3 {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    h4 {
+        font-size: 18pt;
+        font-weight: bold;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+</style>
+{% endblock %}

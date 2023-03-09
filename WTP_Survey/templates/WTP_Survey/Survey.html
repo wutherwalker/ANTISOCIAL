@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Questionnaire
+{% endblock %}
+
+{% block content %}
+<p>
+    The experiment is nearly complete. Thank you for your participation.
+</p>
+<p>
+    Please answer the following survey questions. Your answers will be used for this study only.
+    Your identity will not be associated with your answers.
+</p>
+
+    {% formfields %}
+    {% next_button %}
+
+{% endblock %}

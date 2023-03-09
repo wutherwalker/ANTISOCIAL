@@ -1,0 +1,92 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3: Tasks with Partners
+{% endblock %}
+
+{% block content %}
+
+    <div class="grid-container">
+        <div class="item item-1">
+            <h4>Instructions: 6 of 7</h4>
+        </div>
+        <div class="item item-2">
+            <p class="custom">
+<ul class="custom">
+	<li> Depending on whether you and your partner agree/disagree, you may want to modify the placements of the <b><font color="red">red</font></b>
+        items on your scale.</li>
+	<li> The goal is for both of you to try to agree which option is most jointly beneficial for all pairings of items.</li>
+</ul>
+            </p>
+        </div>
+        <div class="item item-3">
+          <img src='{% static "accom_dynam/pics/comp_util_drag_scale_new.gif" %}' width="75%"/>
+        </div>
+        <div class="item item-4">
+            <p class="custom">
+                <i>*This is an animation. It is not interactive.</i>
+            </p>
+            <p class="custom">
+                For example, based on results from previous rounds suppose you think that your partner likes tennis more than
+                what your current model implies. Then, as in the graphic to the left, you could update your model of your partner
+                by clicking on the "Tennis" label and dragging it up.
+            </p>
+        </div>
+    </div>
+
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto auto auto;
+  grid-column-gap: 35px;
+  grid-row-gap: 15px;
+  justify-content: start;
+  align-content: start;
+}
+
+.item-1 {
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: start start;
+}
+
+.item-2 {
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  place-self: start start;
+}
+
+.item-3 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  place-self: start end;
+}
+
+.item-4 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  place-self: center start;
+}
+
+</style>
+{% endblock %}

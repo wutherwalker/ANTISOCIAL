@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN">
+{% load otree static %}
+
+<html>
+	<head>
+
+	</head>
+	<body>
+
+<script type="text/javascript" src='{% static "accom_dynam/js/wz_dragdrop.js" %}'></script>
+<!-- wz_dragdrop.js (Dragdrop Bibliothek) is (c) Walter Zorn - see javascript source code for details -->
+<script type="text/javascript" src='{% static "accom_dynam/js/ratingscales.js" %}'></script>
+<!-- ratingscales.js (Ratingscales Addon) is (c) Timo Gnambs - see javascript source code for details -->
+<!-- "wz_dragdrop.js" and "ratingscale.js" have to be included immediatly after "<body onload='next_page()'>" -->
+
+    <p>
+        <table align="center" border="0">
+            <tr>
+                <td></td>
+                <td align="center">
+                    <img src='{% static "accom_dynam/pics/pix.gif" %}' border="0">
+                        <script type="text/javascript">
+scales.scale('VAS2', 'click', 399, ['{% static "accom_dynam/pics/line00.gif" %}', 399, 10], ['{% static "accom_dynam/pics/00.gif" %}'], ['', '']);							</script>
+<noscript>
+<table border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td align="right" valign="middle" width="125"></td>
+<td align="center" valign="middle" width="0"><input type="radio" name="THIS_BUTTON_NAME" value="10001"></td>
+<td align="center" valign="middle" width="0"><input type="radio" name="THIS_BUTTON_NAME" value="10002"></td>
+<td align="center" valign="middle" width="0"><input type="radio" name="THIS_BUTTON_NAME" value="10003"></td>
+<td align="center" valign="middle" width="0"><input type="radio" name="THIS_BUTTON_NAME" value="10004"></td>
+<td align="center" valign="middle" width="0"><input type="radio" name="THIS_BUTTON_NAME" value="10005"></td>
+<td align="left" valign="middle" width="125"></td>
+</tr>
+</table>
+</noscript>
+                </td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td align="center" valign="top">
+                    Dislike very much
+                </td>
+
+                <td align="center" valign="top">
+                    Indifferent
+                </td>
+
+                <td align="center" valign="top">
+                    Like very much
+                </td>
+            </tr>
+        </table>
+    </p>
+
+<!-- "<script type="text/javascript">scales.init('value');</script>" has to be immediately before "</body> -->
+		<script type="text/javascript">scales.init('value');</script>
+	</body>
+</html>

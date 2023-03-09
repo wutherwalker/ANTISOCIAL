@@ -1,0 +1,122 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+Results
+{% endblock %}
+
+{% block content %}
+
+
+
+{% if subsession.round_number <= session.config.num_of_test_rounds %}
+    <h3>Test round <strong>{{ subsession.round_number }}</strong> of {{ session.config.num_of_test_rounds }}</h3>
+
+    {% else %}
+
+
+    <h3>Round <strong>{{ round_number }}</strong> of {{ num_of_rounds }}</h3>
+    {% endif %}
+
+<br>
+<br>
+
+
+    {% if player.match_with %}
+        {% if participant.vars.role == "seller" %}
+        <h4>In this round, you produced {{ player.quantity }} units for a total cost of {{ cost }}. You received payment of {{ player.value }}.  Your payoff in this round is <strong>{{ player.payoff }}</strong>.</h4>
+        {% else %}
+        <h4>In this round, you purchased {{ player.quantity }} units for a total value of {{ benefit }}. You paid {{ player.value }}. Your payoff in this round is <strong>{{ player.payoff }}</strong>.</h4>
+        {% endif %}
+    {% else %}
+    <h4>You did not trade in this round. Your payoff in this round is 0.</h4>
+    {% endif %}
+    <br>
+    <br>
+    <div class="white-background">
+        <div id="transaction">
+                <h3>Round History</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Round #</th>
+                            <th>Quantity</th>
+                            <th>Tokens</th>
+                            <th>Your payoff</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for player in player_in_all_rounds %}
+                    <tr>
+                        <td>
+                            {% if player.round_number == round_number %}
+                            <span class="badge badge-primary">This round</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ player.round_number }}
+                        </td>
+                        <td>
+                            {{ player.quantity }}
+                        </td>
+                        <td>
+                            {{ player.value }}
+                        </td>
+                        <td>
+                            <strong>{{ player.payoff }}</strong>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                        <!--<tr v-for="transaction in transactions">-->
+                            <!--<td>${ transaction.round }</td>-->
+                            <!--<td>${ transaction.quantity }</td>-->
+                            <!--<td>${ transaction.value }</td>-->
+                            <!--<td v-bind:class="{ 'match status' : round.buyer === playerId }"><strong>${ transaction.buyer_payoff }</strong>-->
+                                <!--<span v-if="transaction.buyer === playerId" class="badge badge-primary">Your payoff this round</span>-->
+                            <!--</td>-->
+                            <!--<td v-bind:class="{ 'match status' : round.seller === playerId }"><strong>${ transaction.seller_payoff }</strong>-->
+                                <!--<span v-if="transaction.seller === playerId" class="badge badge-primary">Your payoff this round</span>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                    </tbody>
+                </table>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    {% next_button %}
+{% endblock %}
+
+{% block styles %}
+<link href="{% static "double_auction/styles.css" %}" rel="stylesheet">
+<style type="text/css">
+    .otree-title {
+        text-align: center;
+    }
+
+    .otree-timer {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 200px;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{% static "double_auction/vue.js" %}"></script>
+<script>Vue.options.delimiters = ["${", "}"]</script>
+<!--<script src="{% static "double_auction/toastr.min.js" %}"></script>-->
+
+<script>
+    var player = {
+        id: {{ player.id }}
+    }
+    var transactions = {{ transactions|json }};
+</script>
+<script src="{% static "double_auction/result.js" %}" charset="utf-8"></script>
+{% endblock %}
+

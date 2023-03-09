@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Decision, round {{ round_number }} of {{ num_rounds }}
+{% endblock %}
+
+{% block content %}
+<p>
+    You are a <strong>sender</strong>.
+</p>
+<p>
+    The coin has turned up {{ coin_flip }} this round.
+</p>
+<p>
+    The other player assigned to your group will know what group you are in and
+    what mug, if any, you purchased in the previous part of the experiment.
+    They will not learn the true outcome of the coin flip until after making their decision.
+</p>
+<p>
+    Remember, you are in the {{ own_group }} group.
+</p>
+<p>
+    The other player who has been assigned to you this round is in the {{ other_group }} group.
+</p>
+{% if other_purchased %}
+<p>
+    The other player purchased {{ other_object_choice }}, which is the object associated
+    with the {{ object_group }} group.
+</p>
+{% else %}
+<p>
+    The other player did not purchase a mug in the previous part of the experiment.
+</p>
+{% endif %}
+<p>
+    What message do you want to send?
+</p>
+{% formfield player.message %}
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,338 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 2: Individual Task
+{% endblock %}
+
+{% block content %}
+
+<div class="grid-container">
+  <div class="item item-20">
+      <h4>Instructions</h4>
+  </div>
+  <div class="item item-21">
+      <p class="custom">
+          You have been given a set of {{ num_items }} types of {{ item_type }}. On the scales below,
+          please indicate how much you like/dislike each option. The red mark represents your choice. The center of the line
+          implies indifference, the top end point represents highest possible liking, and the bottom end point represents
+          highest possible dislike. The farther you move the marker up, the more you like the option. The farther
+          you move the marker down, the more you dislike the option. Two options cannot have the same placement on the
+          line. Once you are satisfied with your placements, please click Next.
+      </p>
+  </div>
+
+  <div class="item item-1">
+      <b>{{outcomes.0}}</b>
+  </div>
+  <div class="item item-2">
+      <b>{{outcomes.1}}</b>
+  </div>
+  <div class="item item-3">
+      <b>{{outcomes.2}}</b>
+  </div>
+  <div class="item item-4">
+      <b>{{outcomes.3}}</b>
+  </div>
+  <div class="item item-5">
+      <b>{{outcomes.4}}</b>
+  </div>
+  <div class="item item-6">
+      <b>{{outcomes.5}}</b>
+  </div>
+  <div class="item item-7">
+      <b>{{outcomes.6}}</b>
+  </div>
+  <div class="item item-8">
+      <b>{{outcomes.7}}</b>
+  </div>
+  <div class="item item-9">
+      Like very much
+  </div>
+  <div class="item item-10">
+      Indifferent
+  </div>
+  <div class="item item-11">
+      Dislike very much
+  </div>
+  <div class="item item-12">
+      <center>
+          {% include 'accom_dynam/slider1.html' %}
+      </center>
+  </div>
+  <div class="item item-13">
+      <center>
+          {% include 'accom_dynam/slider2.html' %}
+      </center>
+  </div>
+    <div class="item item-14">
+      <center>
+          {% include 'accom_dynam/slider3.html' %}
+      </center>
+  </div>
+  <div class="item item-15">
+      <center>
+          {% include 'accom_dynam/slider4.html' %}
+      </center>
+  </div>
+  <div class="item item-16">
+      <center>
+          {% include 'accom_dynam/slider5.html' %}
+      </center>
+  </div>
+  <div class="item item-17">
+      <center>
+          {% include 'accom_dynam/slider6.html' %}
+      </center>
+  </div>
+  <div class="item item-18">
+      <center>
+          {% include 'accom_dynam/slider7.html' %}
+      </center>
+  </div>
+    <div class="item item-19">
+      <center>
+          {% include 'accom_dynam/slider8.html' %}
+      </center>
+  </div>
+</div>
+
+
+<br>
+<center>
+<button class="otree-btn-next btn btn-primary" type="button" onClick="resetUtils()" style="font-size:18px">Reset All Scales</button>
+&emsp; &emsp; &emsp; &emsp;
+<button class="otree-btn-next btn btn-primary" onClick="return checkUtilVals()" style="font-size:18px">Next</button>
+</center>
+
+{% endblock %}
+
+
+
+
+{% block scripts %}
+
+<script>
+    function resetUtils() {
+        document.getElementById("myRange1").value = "0";
+        document.getElementById("myRange2").value = "0";
+        document.getElementById("myRange3").value = "0";
+        document.getElementById("myRange4").value = "0";
+        document.getElementById("myRange5").value = "0"
+        if ({{ num_items }} == 8) {
+            document.getElementById("myRange6").value = "0";
+            document.getElementById("myRange7").value = "0";
+            document.getElementById("myRange8").value = "0";
+        }
+    }
+
+    function isEqual(value, other) {
+        // Get the value type
+        var type = Object.prototype.toString.call(value);
+
+        // If the two objects are not the same type, return false
+        if (type !== Object.prototype.toString.call(other)) return false;
+
+        // If items are not an object or array, return false
+        if (['[object Array]', '[object Object]'].indexOf(type) < 0) return false;
+
+        // Compare the length of the length of the two items
+        var valueLen = type === '[object Array]' ? value.length : Object.keys(value).length;
+        var otherLen = type === '[object Array]' ? other.length : Object.keys(other).length;
+        if (valueLen !== otherLen) return false;
+
+        // Compare two items
+        var compare = function (item1, item2) {
+            // Code will go here...
+        };
+
+        // Compare properties
+        var match;
+        if (type === '[object Array]') {
+            for (var i = 0; i < valueLen; i++) {
+                compare(value[i], other[i]);
+            }
+        } else {
+            for (var key in value) {
+                if (value.hasOwnProperty(key)) {
+                    compare(value[key], other[key]);
+                }
+            }
+        }
+
+        // If nothing failed, return true
+        return true;
+    };
+
+    function checkUtilVals() {
+        utils = [document.getElementById("myRange1").value, document.getElementById("myRange2").value, document.getElementById("myRange3").value, document.getElementById("myRange4").value];
+        var counts = [], prev;
+
+        utils.sort();
+        for ( var i = 0; i < utils.length; i++ ) {
+            if ( utils[i] !== prev ) {
+                counts.push(1);
+            } else {
+                counts[counts.length-1]++;
+            }
+            prev = utils[i];
+        };
+
+        if (isEqual(counts, [1,1,1,1])) {
+            return true;
+        } else {
+            alert("WARNING: Make sure all genres have unique values before proceeding.");
+            return false;
+        };
+
+    }
+</script>
+
+{% endblock %}
+
+
+{% block app_styles %}
+
+<style type="text/css">
+.custom {
+    font-size: 18px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 8% 11.5% 11.5% 11.5% 11.5% 11.5% 11.5% 11.5% 11.5%;
+  grid-template-rows: auto auto 25px 150px 150px 150px;
+  justify-content: start;
+  align-content: start;
+}
+
+.item-1 {
+  grid-column: 2 / span 1;
+  grid-row: 3 / span 1;
+  place-self: center center;
+}
+
+.item-2 {
+  grid-column: 3 / span 1;
+  grid-row: 3 / span 1;
+  place-self: center center;
+}
+
+.item-3 {
+  grid-column: 4 / span 1;
+  grid-row: 3 / span 1;
+  place-self: center center;
+}
+
+.item-4 {
+  grid-column: 5 / span 1;
+  grid-row: 3 / span 1;
+  place-self: center center;
+}
+
+.item-5 {
+  grid-column: 6 / span 1;
+  grid-row: 3 / span 1;
+  place-self: center center;
+}
+
+.item-6 {
+  grid-column: 7 / span 1;
+  grid-row: 3 / span 1;
+  place-self: center center;
+}
+
+.item-7 {
+  grid-column: 8 / span 1;
+  grid-row: 3 / span 1;
+  place-self: center center;
+}
+
+.item-8 {
+  grid-column: 9 / span 1;
+  grid-row: 3 / span 1;
+  place-self: center center;
+}
+
+.item-9 {
+  grid-column: 1 / span 1;
+  grid-row: 4 / span 1;
+  place-self: start start;
+}
+
+.item-10 {
+  grid-column: 1 / span 1;
+  grid-row: 5 / span 1;
+  place-self: center start;
+}
+
+.item-11 {
+  grid-column: 1 / span 1;
+  grid-row: 6 / span 1;
+  place-self: end start;
+}
+
+.item-12 {
+  grid-column: 2 / span 1;
+  grid-row: 4 / span 3;
+  place-self: center center;
+}
+
+.item-13 {
+  grid-column: 3 / span 1;
+  grid-row: 4 / span 3;
+  place-self: center center;
+}
+
+.item-14 {
+  grid-column: 4 / span 1;
+  grid-row: 4 / span 3;
+  place-self: center center;
+}
+
+.item-15 {
+  grid-column: 5 / span 1;
+  grid-row: 4 / span 3;
+  place-self: center center;
+}
+
+.item-16 {
+  grid-column: 6 / span 1;
+  grid-row: 4 / span 3;
+  place-self: center center;
+}
+
+.item-17 {
+  grid-column: 7 / span 1;
+  grid-row: 4 / span 3;
+  place-self: center center;
+}
+
+.item-18 {
+  grid-column: 8 / span 1;
+  grid-row: 4 / span 3;
+  place-self: center center;
+}
+
+.item-19 {
+  grid-column: 9 / span 1;
+  grid-row: 4 / span 3;
+  place-self: center center;
+}
+
+.item-20 {
+  grid-column: 1 / span 10;
+  grid-row: 1 / span 1;
+  place-self: center start;
+}
+
+.item-21 {
+  grid-column: 1 / span 10;
+  grid-row: 2 / span 1;
+  place-self: start start;
+}
+
+</style>
+
+
+{% endblock %}

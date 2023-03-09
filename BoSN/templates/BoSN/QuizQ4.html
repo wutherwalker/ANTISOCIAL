@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Quiz
+{% endblock %}
+
+{% block content %}
+
+<p>
+    These questions will test your understanding of the instructions for this experiment.
+</p>
+{% formfield player.q4a label="What is the chance (in percent) that you get an announcement of X?" %}
+{% formfield player.q4b label="What is the chance (in percent) that you get an announcement of Y?" %}
+<p>
+    Click the "Next" button when you are ready to submit your answers.
+</p>
+<p>
+    Make sure all your answers are correct before clicking the "Next" button.
+</p>
+    {% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    title {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 16pt;
+        }
+
+    .red {
+        color: #FF0000;
+        }
+
+    .blue {
+        color: #0000FF;
+        }
+</style>
+{% endblock %}

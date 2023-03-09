@@ -1,0 +1,67 @@
+{% extends "otree/WaitPage.html" %}
+{% load otree static %}
+
+{% block title %}
+    Please wait while other participants finish reading the instructions on this page.
+{% endblock %}
+
+{% block content %}
+
+<p>
+    The total amount of points you get in each round will be the sum of five components:
+</p>
+<ul>
+    <li> Your <b>after-tax income</b>, which is your <b>taxable income</b> minus any tax you paid</li>
+    <li> Your share of the <b>contributions</b> that <b>you</b> gave to your group. </li>
+    <li> Your share of the <b>tax revenue</b> collected from <b>you</b>.</li>
+    <li> Your share of the <b>contributions</b> that <b>others</b> gave to your group.</li>
+    <li> Your share of the <b>tax revenue</b> collected from <b>others</b> in your group. </li>
+</ul>
+<p>
+    The part of your payoff that is the result of your own choices will be referred to as your <b>net payoff</b>.
+    Your <b>total payoff</b> is your <b>net payoff</b> plus what you receive as a result of choices made by others in your group.
+</p>
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        font-size: 18pt;
+        width: 300px;
+        text-align: center;
+        }
+
+    td {
+        font-size: 36pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 600px;
+        }
+
+    .history td {
+        font-size: 18pt;
+        }
+
+    .history th {
+        width: 150px;
+        }
+
+    h3 {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+</style>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Taxes
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Your <b>starting amount</b> minus your <b>contribution</b> to your group is your <b>taxable income</b>.
+    The following table shows, in increments of {{ 5 | c }}, how much tax you would pay, and what you would be left
+    with as after-tax income:
+</p>
+
+<table class="tax">
+    <tr>
+        <th>Taxable income</th><th>Tax rate</th><th>Tax paid</th><th>After-tax income</th>
+    </tr>
+    {% for taxable_income, tax_rate, tax_paid, after_tax_income in tax_matrix %}
+    <tr>
+        <td> {{ taxable_income }} </td>
+        <td> {{ tax_rate }} % </td>
+        <td> {{ tax_paid }} </td>
+        <td> {{ after_tax_income }} </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p>
+    Instructions are continued on the next page.
+    Click "Next" when you have finished reading the instructions on this page.
+</p>
+
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        font-size: 18pt;
+        width: 200px;
+        text-align: center;
+        }
+
+    td {
+        font-size: 18pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 600px;
+        }
+
+    .tax {
+        width: 800 px;
+        }
+
+    .tax th {
+        width: 100 px;
+        }
+
+    .history td {
+        font-size: 18pt;
+        }
+
+    .history th {
+        width: 150px;
+        }
+
+    h3 {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+</style>
+{% endblock %}

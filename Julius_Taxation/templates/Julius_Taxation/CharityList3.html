@@ -1,0 +1,90 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+   Charity Choices
+{% endblock %}
+
+{% block content %}
+<img src="{% static 'HW5_Julius_Taxation/MSF-dual-logo.png' %}" width="400" height="150"/>
+<p>
+    Doctors Without Borders/<b>Medecins Sans Frontieres</b>(MSF) is an organization that helps people worldwide where the
+    need is greatest, delivering emergency medical aid to people affects by conflict, epidemics, disasters, or exclusion
+    from health care. In emergencies and their aftermath, Medecins Sans Frontieres provides basic health care,
+    rehabilitates and runs hospitals and clinics, performs surgery, battles epidemics, carries out vaccination campaigns,
+    provides water, sanitation, and shelter support, runs nutritional programs, and offers mental health care. Through
+    longer-term programs, Medecins Sans Frontieres also treats chronic diseases such as tuberculosis, malaria,
+    sleeping sickness, and AIDS.
+</p>
+
+{% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 18pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 18pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 20pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+</style>
+{% endblock %}
+
+

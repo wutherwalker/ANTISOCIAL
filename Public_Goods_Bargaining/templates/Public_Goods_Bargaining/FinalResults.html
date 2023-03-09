@@ -1,0 +1,62 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Final Results
+{% endblock %}
+
+{% block content %}
+
+    <p><center>You ID number is {{ player.participant.id_in_session }}</center></p>
+
+    <p><center>The experiment has concluded.</center></p>
+
+    <p><center>Sequences {{ supergame1 }} and {{ supergame2 }} were chosen for payment.</center></p>
+
+    <p><center>Your combined payoff from these two sequences is ${{ player.bigpayoff }}.</center></p>
+
+    <p><center>The show up payment is ${{ Constants.ShowUpPayment }}.</center></p>
+
+    <p><center>Your experimental earnings are ${{ VariablePayment }}</center></p>
+
+    <p><center>Your total payment for this experiment is ${{ player.totalpayoff }}. </center></p>
+
+    <p><center>Thank you for participating!</center></p>
+
+<table class="table">
+    <tr>
+        <th colspan="5"></th>
+        <th colspan="3" bgcolor="aqua" align="center"><center>Proposed Allocations</center></th>
+        <th colspan="2"></th>
+    </tr>
+
+    <tr>
+        <th>Sequence</th>
+        <th>Round</th>
+        <th>Your Role</th>
+        <th>Your Type</th>
+        <th>Default Group Points</th>
+        <th bgcolor="aqua"><center>Group Account</center></th>
+        <th bgcolor="aqua">Your Account</th>
+        <th bgcolor="aqua">Their Account</th>
+        <th>Accepted Offer?</th>
+        <th>Your Payoff</th>
+    </tr>
+    {% for p in player.in_all_rounds %}
+        <tr>
+            <td>{{ p.Sequence }}</td>
+            <td>{{ p.round_number }}</td>
+            <td>{{ p.yourrole }}</td>
+            <td>{{ p.yourtype }}</td>
+            <td>{{ p.GroupFloor }}</td>
+            <td>{{ p.GroupOffer }}</td>
+            <td>{{ p.YourOffer }}</td>
+            <td>{{ p.TheirOffer }}</td>
+            <td>{{ p.OfferDecision }}</td>
+            <td>{{ p.payoff }}</td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+{% if assign_groups %}
+    Group assignments have now been made.
+{% else %}
+    Art Task Finished
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<h2>
+    {% if assign_groups %}
+        Based on your responses and those of other participants,
+        {% if player.group.artist == 'Klee' %}
+            you have been assigned to the Klee group.
+        {% elif player.group.artist == 'Kandinsky' %}
+            you have been assigned to the Kandinsky group.
+        {% else %}
+            we were unable to assign you to a group.
+            We had too many participants for one of the groups.
+            You will be sent home early with the ${{ show_up_fee }} participation fee.
+        {% endif %}
+    {% else %}
+    <p>
+        Thank you. You have completed this part of the experiment. We will now move on to the next part.
+    </p>
+    {% endif %}
+</h2>
+    {% next_button %}
+{% endblock %}
+
+

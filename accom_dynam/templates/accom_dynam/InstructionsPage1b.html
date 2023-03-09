@@ -1,0 +1,125 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3: Tasks with Partners
+{% endblock %}
+
+{% block content %}
+
+
+<div class="grid-container">
+    <div class="item item-1">
+        <h4>Instructions: 2 of 7</h4>
+    </div>
+    <div class="item item-2">
+        Your Scale
+    </div>
+    <div class="item item-3">
+      <font color="red">Your Model of Partner's Scale</font>
+    </div>
+    <div class="item item-4">
+
+	    <ul class="custom">
+
+        <li> The <b>black</b> items (i.e., your preferences) will be fixed and cannot be changed </li>
+        <li> The <b><font color="red">red</font></b> items (i.e., your model of your partner's preferences)
+            will be possible to adjust at any time </li>
+        <li> <i>The <b><font color="red">red</font></b> items do not move independently of each other.</i> If you move one
+            <b><font color="red">red</font></b> item, the computer will move all other
+        <b><font color="red">red</font></b> items at the same time so that the relationship between them do not change</li>
+        <li>The computer has information about the relationship between the items in the model of your partner. You
+        will provide the computer with information on how your model of your own preferences compares with your model of
+        your partner's preferences </li>
+
+        </ul>
+
+        <p class="custom">
+            An example using sports is shown to the right. This example is only
+            for demonstration purposes. You can change the <b><font color="red">red</font></b> items by clicking on one
+            of the labels and dragging it up (to increase liking) or down (to decrease liking).
+        </p>
+
+        <p class="custom">
+            Click NEXT when you are ready to proceed.
+        </p>
+    </div>
+    <div class="item item-5">
+      {% include 'accom_dynam/comp_util_scales_example.html' %}
+        <center> <br><i>*This is interactive!</i></center>
+    </div>
+    <div class="item item-6">
+
+    </div>
+</div>
+
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 66% 17% 17%;
+  grid-template-rows: auto auto auto;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  justify-content: start;
+  align-content: start;
+}
+
+.item-1 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: end start;
+}
+
+.item-2 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: end center;
+}
+
+.item-3 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  place-self: end center;
+}
+
+.item-4 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  place-self: start start;
+}
+
+.item-5 {
+  grid-column-start: 2;
+  grid-column-end: span 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  place-self: center center;
+}
+
+.item-6 {
+  grid-column-start: 2;
+  grid-column-end: span 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  place-self: center center;
+}
+</style>
+{% endblock %}

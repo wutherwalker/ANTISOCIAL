@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Art Task Instructions
+{% endblock %}
+
+{% block content %}
+
+<p>
+   In this part of the experiment, everyone will be shown {{ paintings_to_choose }} pairs of paintings
+    by two artists.
+</p>
+<p>
+    You will be asked to choose which painting in each pair you prefer.
+</p>
+{% if assign_groups %}
+<p>
+    You will then be assigned a group based on your responses.
+</p>
+{% endif %}
+<p>
+    After this part has finished, we will give you instructions for the next part of the experiment.
+</p>
+    {% next_button %}
+
+{% endblock %}

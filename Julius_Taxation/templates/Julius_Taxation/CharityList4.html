@@ -1,0 +1,90 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Charity Choices
+{% endblock %}
+
+{% block content %}
+<img src="{% static 'HW5_Julius_Taxation/ACS-logo.jpg' %}" width="300" height="195"/>
+<p>
+    The <b>American Cancer Society</b> is a nationwide, community-based, voluntary health organization dedicated to
+    eliminating cancer as a major health problem by preventing cancer, saving lives, and diminishing suffering from
+    cancer, through research, education, advocacy, and service. The American Cancer Society award grants to academic
+    institutions and professionals in the fields of medicine and science for investigations into the causes, prevention,
+    and cure of cancer. Researchers at the American Cancer Society analyze trends in cancer occurrence and risk factors,
+    perform screening, and oversee behavioral studies on areas such as family dynamics, minority issues, and
+    communication between physicians and patients.
+</p>
+
+{% next_button %}
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 18pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 18pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 18pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 20pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+</style>
+{% endblock %}
+
+

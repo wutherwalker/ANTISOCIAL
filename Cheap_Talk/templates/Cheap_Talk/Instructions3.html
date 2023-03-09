@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+<p>
+    If you are a <strong>sender</strong>, your payoff is entirely determined by the receiver's <em>action</em>:
+    Your payoff will be {{ win_payoff }} if the receiver chooses H, and {{ lose_payoff }} if the receiver chooses T.
+</p>
+<p>
+    If you are a <strong>receiver</strong>, your payoff is entirely determined by <em>accuracy</em>:
+    Your payoff will be {{ win_payoff }} if you choose H and the coin actually came up "Heads",
+    {{ win_payoff }} if you choose T and the coin actually came up "tails",
+    and {{ lose_payoff }} otherwise.
+</p>
+<p>
+    This is summarized in the following payoff table. The first number in each cell is the sender's
+    payoff, and the second is the receiver's.
+</p>
+<table>
+    <tr>
+        <th></th><th>H</th><th>T</th>
+    </tr>
+    <tr>
+        <th>Coin is Heads</th><td>{{ win_payoff }}, {{ win_payoff }}</td><td>{{ lose_payoff }}, {{ lose_payoff }}</td>
+    </tr>
+    <tr>
+        <th>Coin is Tails</th><td>{{ win_payoff }}, {{ lose_payoff }}</td><td>{{ lose_payoff }}, {{ win_payoff }}</td>
+    </tr>
+</table>
+    {% next_button %}
+
+{% endblock %}

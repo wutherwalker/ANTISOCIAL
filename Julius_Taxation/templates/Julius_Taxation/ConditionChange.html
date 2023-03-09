@@ -1,0 +1,91 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instructions for the next {{ round_set }} rounds
+{% endblock %}
+
+{% block content %}
+{% if player.revenue_return %}
+<p> For the following {{ round_set }} rounds, tax money collected will be multiplied by {{ revenue_multiplier }},
+    and then shared equally with everyone in the group, including yourself.
+    This means that for each {{ 1 | c }} you pay in taxes, you will get back {{ Constants.MPCR_government | c }}.
+</p>
+{% else %}
+<p> For the following {{ round_set }} rounds, tax money collected is simply lost.
+    Neither you nor anyone in your group will receive any part of it.
+</p>
+{% endif %}
+
+<p>Click "Next" when you have finished reading these instructions and are ready to move on.</p>
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        font-size: 18pt;
+        width: 300px;
+        text-align: center;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        color: #CC0000;
+        }
+
+    body {
+        font-size: 16pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .tax {
+        width: 800 px;
+        }
+
+    .tax th {
+        width: 400 px;
+        }
+
+    .history td {
+        font-size: 18pt;
+        }
+
+    .history th {
+        width: 150px;
+        }
+
+    h3 {
+        font-size: 24pt;
+        font-weight: bold;
+        }
+
+    h4 {
+        font-size: 18pt;
+        font-weight: bold;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+</style>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'otree/WaitPage.html' %}
+{% load staticfiles otree %}
+{% block title %}{{ title_text }}{% endblock %}
+{% block content %}
+    {{ body_text }}
+<table class="table">
+    <tr>
+        <th colspan="5"></th>
+        <th colspan="3" bgcolor="aqua" align="center"><center>Proposed Allocations</center></th>
+        <th colspan="2"></th>
+    </tr>
+
+    <tr>
+        <th>Sequence</th>
+        <th>Round</th>
+        <th>Your Role</th>
+        <th>Your Type</th>
+        <th>Default Group Points</th>
+        <th bgcolor="aqua"><center>Group Account</center></th>
+        <th bgcolor="aqua">Your Account</th>
+        <th bgcolor="aqua">Their Account</th>
+        <th>Accepted Offer?</th>
+        <th>Your Payoff</th>
+    </tr>
+    {% for p in player.in_previous_rounds %}
+        <tr>
+            <td>{{ p.Sequence }}</td>
+            <td>{{ p.round_number }}</td>
+            <td>{{ p.yourrole }}</td>
+            <td>{{ p.yourtype }}</td>
+            <td>1</td>
+            <td>{{ p.GroupOffer }}</td>
+            <td>{{ p.YourOffer }}</td>
+            <td>{{ p.TheirOffer }}</td>
+            <td>{{ p.OfferDecision }}</td>
+            <td>{{ p.payoff }}</td>
+        </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}

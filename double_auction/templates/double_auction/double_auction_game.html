@@ -1,0 +1,226 @@
+{% if subsession.round_number <= session.config.num_of_test_rounds %}
+<div class="aslert alert-info">This is a test round!</div>
+{% endif %}
+<div id="info" class="instructions well well-lg">
+
+{% if subsession.round_number <= session.config.num_of_test_rounds %}
+    <h3>Test round <strong>{{ subsession.round_number }}</strong> of {{ session.config.num_of_test_rounds }}</h3>
+
+    {% else %}
+
+    <h3>Round <strong>{{ round_number }}</strong> of {{ num_of_rounds }}: You are a {{ participant.vars.role }}.</h3>
+    {% endif %}
+    <!--<p>-->
+        <!--{% if participant.vars.role == "buyer" %}-->
+        <!--<br />-->
+        <!--You are a buyer.-->
+        <!--{% else %}-->
+        <!--<br />-->
+        <!--You are a seller.-->
+        <!--{% endif %}-->
+    <!--</p>-->
+</div>
+
+<div id="graph" ></div>
+
+<h4 id="display" name="display" v-if="!match"></h4>
+
+<div id="da_form">
+    <div v-if="!started" class="alert alert-warning">Bargaining begins in <span id="start-delay-timer"></span> seconds</div>
+    <div v-if="!match && started">
+        <div>
+            <div class="white-background">
+                <table>
+                    <tr>
+                        <td>
+                        {% if participant.vars.role == 'seller' %}
+                        <p> Choose your proposed quantity between {{ minQuantity }} and {{ maxQuantity }}: </p>
+                        {% else %}
+                        <p> Choose your proposed quantity between {{ minQuantity }} and {{ maxQuantity }}: </p>
+                        {% endif %}
+                        &nbsp;<input id="quantity" name="quantity" class="slider" type="range" min="{{ minQuantity }}" max="{{ maxQuantity }}" step="{{ quantity_increment }}" value=0
+                            oninput="{
+                               var proposed_quantity = this.value
+                               var buyer_value = Math.round(100 * {{ vm }} * proposed_quantity ** {{ vx }} + Number.EPSILON)/100
+                               var seller_cost = Math.round(100 * {{ cm }} * proposed_quantity ** {{ cx }} + Number.EPSILON)/100
+                               document.getElementById('id_buyer_value').innerHTML = buyer_value
+                               document.getElementById('id_seller_cost').innerHTML = seller_cost
+                               document.getElementById('id_proposed_quantity').innerHTML = proposed_quantity
+                               var proposed_price = document.getElementById('id_proposed_price').innerHTML
+                               var buyer_profit = Math.round(100 * (buyer_value - proposed_price) + Number.EPSILON)/100
+                               var seller_profit = Math.round(100 * (proposed_price - seller_cost) + Number.EPSILON)/100
+                               document.getElementById('id_proposed_price').innerHTML = proposed_price
+                               document.getElementById('id_buyer_profit').innerHTML = buyer_profit
+                               document.getElementById('id_seller_profit').innerHTML = seller_profit
+                                }">
+                        <span id="id_proposed_quantity"></span>
+                        <p>Choose your proposed number of tokens between {{ minValue }} and {{ maxValue }}:</p>
+                        &nbsp;<input id="offer" name="offer" class="slider" type="range" min="{{ minValue }}" max="{{ maxValue }}" step="{{ money_increment }}" value=0
+                             oninput="{
+                               var proposed_price = this.value
+                               var buyer_value = document.getElementById('id_buyer_value').innerHTML
+                               var seller_cost = document.getElementById('id_seller_cost').innerHTML
+                               var buyer_profit = Math.round(100*(buyer_value - proposed_price) + Number.EPSILON)/100
+                               var seller_profit = Math.round(100*(proposed_price - seller_cost) + Number.EPSILON)/100
+                               document.getElementById('id_proposed_price').innerHTML = proposed_price
+                               document.getElementById('id_buyer_profit').innerHTML = buyer_profit
+                               document.getElementById('id_seller_profit').innerHTML = seller_profit
+                                }">
+                        <span id="id_proposed_price"></span>
+                        </td>
+                        <td>
+                            &nbsp; &nbsp; &nbsp;
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    {% if participant.vars.role == 'buyer' %}
+                                    <td>The total value of this many units to you is: </td>&nbsp;
+                                    {% else %}
+                                    <td>The total value of this many units to the buyer is: </td>
+                                    {% endif %}
+                                    <td id="id_buyer_value"></td>
+                                </tr>
+                                <tr>
+                                    {% if participant.vars.role == 'seller' %}
+                                    <td>The total cost of this many units to you is: </td>
+                                    {% else %}
+                                    <td>The total cost of this many units to the seller is: </td>
+                                    {% endif %}
+                                    <td id="id_seller_cost"></td>
+                                </tr>
+                                <tr>
+                                    {% if participant.vars.role == 'buyer' %}
+                                    <td><strong>Your payoff would be:</strong> </td>
+                                    {% else %}
+                                    <td>The buyer's payoff would be: </td>
+                                    {% endif %}
+                                    <td id="id_buyer_profit"></td>
+                                </tr>
+                                <tr>
+                                    {% if participant.vars.role == 'seller' %}
+                                    <td><strong>Your payoff would be:</strong> </td>
+                                    {% else %}
+                                    <td>The seller's payoff would be: </td>
+                                    {% endif %}
+                                    <td id="id_seller_profit"></td>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="input-group-btn">
+                {% if participant.vars.role == 'buyer' %}
+                    <button v-if="!match" type="button" class="btn btn-primary" onclick="submitForm(this, 'buyer', '{{ cm }}', '{{ cx }}', '{{ vm }}', '{{ vx }}', '{{ group }}')">Submit</button>
+                {% else %}
+                    <button v-if="!match" type="button" class="btn btn-primary" onclick="submitForm(this, 'seller', '{{ cm }}', '{{ cx }}', '{{ vm }}', '{{ vx }}', '{{ group }}')">Submit</button>                {% endif %}
+            </div>
+        </div>
+        <!--<div v-if="lock" class="">Your current {% if participant.vars.role == 'buyer' %}bid{% else %}ask{% endif %} is <strong>${ value }</strong></div>-->
+        <!--<button v-if="lock" type="button" class="btn btn-primary" onclick='clearbet()'>Clear</button>-->
+    </div>
+    <!--Instead of showing this alert, I want to just submit the page-->
+    <div v-if="match" class="alert alert-success">You successfully traded.</div>
+    <button v-if="match" name="finish_page" value="True" class="btn btn-primary btn-large">Next</button>
+</div>
+<hr />
+
+<div class="white-background">
+    <div class="row">
+        <div class="col-8" id="app" style="margin-bottom: 40px; min-height:30vh; width: 1000px;">
+            <h3>Current proposals</h3>
+            <table class="table fixed">
+                <thead>
+                    <tr>
+                        <th>Buyer Proposals</th>
+                        <th>Seller Proposals</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="row in table.rows">
+                        <td>
+                            <span v-if="row.r2" v-bind:class="{ 'match status': row.r2.match}">
+                            <span v-if="isSameGroup(row.r2, '{{ group }}')">
+                            <!--<span v-if="row.r2">-->
+                                <strong>${ row.r2.quantity }</strong> units for <strong>${ row.r2.value }</strong>; buyer gets <strong>${ row.r2.buyer_payoff }</strong>, seller gets <strong>${ row.r2.seller_payoff }</strong>
+                                <!--<span v-if="row.r2.match" class="badge badge-success">trading</span>-->
+                                <span v-if="row.r2.id === playerId" class="badge badge-primary">you</span>
+                                <button type="button" v-if="isAcceptable(row.r2, 'buyer', {{ cm }}, {{ cx }}, {{ vm }}, {{ vx }})" v-on:click="accept(row.r2)" class="btn btn-success btn-xs"><small>Accept</small></button>
+                            </span>
+                            </span>
+                        </td>
+                        <td>
+                            <span v-if="row.r1" v-bind:class="{ 'match status': row.r1.match }">
+                            <span v-if="isSameGroup(row.r1, '{{ group }}')">
+                            <!--<span v-if="row.r1">-->
+                                <strong>${ row.r1.quantity }</strong> units for <strong>${ row.r1.value }</strong>; buyer gets <strong>${ row.r1.buyer_payoff }</strong>, seller gets <strong>${ row.r1.seller_payoff }</strong>
+                                <!--<span v-if="row.r1.match" class="badge badge-success">trading</span>-->
+                                <span v-if="row.r1.id === playerId" class="badge badge-primary">you</span>
+                                <button type="button" v-if="isAcceptable(row.r1, 'seller', {{ cm }}, {{ cx }}, {{ vm }}, {{ vx }})" v-on:click="accept(row.r1)" class="btn btn-success btn-xs"><small>Accept</small></button>
+                            </span>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--<div id="participant_table" class="col-4">-->
+            <!--<h3>Market Participants</h3>-->
+            <!--<table class="table table-bordered fixed">-->
+                <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th>Buyer</th>-->
+                        <!--<th>Seller</th>-->
+                    <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                    <!--<tr v-for="part in participants">-->
+                        <!--<td vif="part[0]">-->
+
+                            <!--${ part[0].role } ${ part[0].id_in_group }-->
+                            <!--<span v-if="part[0].id === playerId" class="badge badge-primary">you</span>-->
+                            <!--<span v-if="part[0].status" class="badge badge-secondary">${ part[0].status }</span>-->
+                        <!--</td>-->
+                        <!--<td v-if="!part[0]"></td>-->
+                        <!--<td v-if="part[1]">-->
+                            <!--${ part[1].role } ${ part[1].id_in_group }-->
+                            <!--<span v-if="part[1].id === playerId" class="badge badge-primary">you</span>-->
+                            <!--<span v-if="part[1].status" class="badge badge-secondary">${ part[1].status }</span>-->
+                        <!--</td>-->
+                        <!--<td v-if="!part[1]"></td>-->
+
+                    <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+    </div>
+
+</div>
+
+<div id="next_button">
+    <br/>
+
+</div>
+
+<div id="confirmModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Your proposal</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <!--<div v-if="type === 'bid'" class="modal-body">-->
+                <!--<p>Your ${strings.valueType} is <strong>${value}</strong> but there is a ${strings.comparison} ${strings.otherType} of <strong>${otherValue}</strong>.</p>-->
+                <!--<p>You traded at the price of <strong>${result}</strong>.</p>-->
+            <!--</div>-->
+            <div v-if="type === 'accept'" class="modal-body">
+                <p>By clicking Accept, you accept the proposal from <strong>player ${playerIdInGroup}</strong> of <strong>${quantity}</strong> units for a price of <strong>${value}</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button v-if="type === 'accept'" type="button" class="btn btn-primary" v-on:click="sendIt" data-dismiss="modal">Accept</button>
+                <button v-if="type === 'accept'" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button v-if="type === 'bid'" type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

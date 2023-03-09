@@ -1,0 +1,157 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Allocation round {{ round_number }} of {{ num_rounds }}
+{% endblock %}
+
+{% block content %}
+{% if assign_groups %}
+<div class="group_identity">You are in {{ own_group }} group.</div>
+{% endif %}
+
+<p>
+    You are a <strong>chooser</strong>.
+</p>
+
+<p>
+    Your task is to decide how much of your {{ endowment }} you choose to send to the other player
+    who has been randomly assigned to your group.
+    Whatever you do not send, you will get to keep for yourself.
+</p>
+<p>
+    The other player assigned to your group will not be told anything about you,
+    only how much they were allocated.
+</p>
+{% if assign_groups %}
+<p>
+    Remember, you are in the <span class="group_identity">{{ own_group }} group.</span>
+</p>
+<p>
+    The other player who has been assigned to you this round is in the <span class="group_identity">{{ other_group }} group.</span>
+</p>
+    {% if WTP_task %}
+        {% if other_purchased %}
+        <p>
+            The other player <strong>purchased {{ other_object_choice }},</strong> which is the object associated
+            with the <strong>{{ object_group }}</strong> group.
+        </p>
+        {% else %}
+        <p>
+            The other player <strong>did not purchase</strong> a mug in the previous part of the experiment.
+        </p>
+        {% endif %}
+    {% endif %}
+{% endif %}
+<p>
+    What amount would you like to give to the accepter?
+</p>
+    {% formfield player.allocation %}
+
+    <br/>
+    <br/>
+
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block app_styles %}
+<style type="text/css">
+    th {
+        border: 1px solid black;
+        font-size: 16pt;
+        width: 650px;
+        text-align: right;
+        font-weight:normal;
+        }
+
+    td {
+        font-size: 14pt;
+        border: 1px solid black;
+        text-align: center;
+        }
+    title {
+        font-size: 36pt;
+        font-weight: bold;
+        }
+
+    body {
+        font-size: 14pt;
+        }
+    table {
+        table-layout: fixed;
+        width: 800px;
+        }
+
+    .history td {
+        font-size: 16pt;
+        }
+
+    .history th {
+        font-size: 12pt;
+        width: 100px;
+        text-align: center;
+        }
+
+    h3 {
+        font-size: 18pt;
+        font-weight: bold;
+        }
+
+    .important {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    button {
+        color: #FFFFFF;
+        background-color: #0066BB;
+        border-radius: 8px;
+        font-size: 20pt;
+    }
+    .otree-timer
+    {
+        display: none;
+    }
+
+    .equation {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 28pt;
+        font-style: italic;
+        }
+
+   .group_identity {
+        font-weight: bold;
+        font-size: 16pt;
+   }
+
+   .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+</style>
+{% endblock %}

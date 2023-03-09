@@ -1,0 +1,37 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3: Tasks with Partners
+{% endblock %}
+
+{% block content %}
+
+    <h4>Instructions: 5 of 7</h4>
+
+    <p class="custom">
+<ul class="custom">
+	<li> The computer will make the same calculations for your partner based on where are the items placed in his/her current scale.
+        This is what will be called <i>"your partner's choice"</i>.</li>
+        <li> You will be shown both choices and told whether your current scale matches your partner's current scale on which option
+        is "most jointly beneficial".</li>
+</ul>
+    </p>
+
+   <center> <img src='{% static "accom_dynam/pics/comp_util_infographic3.png" %}' /></center>
+
+    <p>
+        <i>*This is a static picture.</i>
+    </p>
+
+    <button class="otree-btn-next btn btn-primary" style="font-size:18px">Next</button>
+
+{% endblock %}
+
+{% block app_styles %}
+<style type="text/css">
+.custom {
+	font-size: 18px;
+}
+</style>
+{% endblock %}
